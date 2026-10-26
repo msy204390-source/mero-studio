@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#2B3BFF">
+<title>Mero Studio</title>
+<meta name="description" content="Mero Studio: an AI studio for social media posts, graphic designs, ads and writing in 7 languages, from one simple command.">
+<meta property="og:title" content="Mero Studio">
+<meta property="og:description" content="Posts, designs, ads and writing in 7 languages, from one simple command.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='2' width='28' height='28' rx='7' fill='%232B3BFF'/%3E%3Cpath d='M8 23V9l8 9 8-9v14' fill='none' stroke='white' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='25' cy='7' r='3' fill='%23FFB800'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@400;600;700&display=swap">
+<style>
+/* Layout: one calm column. Hero with a live sample design, then the studio (tabs, brand kit, form, results, history), services, steps, one price, FAQ, contact. */
+:root {
+  --bg: #F3F4F7;
+  --surface: #FFFFFF;
+  --fg: #0D1220;
+  --muted: #566075;
+  --line: #D3D8E2;
+  --accent: #2B3BFF;
+  --accent-ink: #FFFFFF;
+  --hi: #FFB800;
+  --ok: #17803D;
+  --bad: #B3261E;
+  --font-display: "Readex Pro", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Arabic", "Readex Pro", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0A0D16; --surface: #121726; --fg: #E8ECF4; --muted: #98A2B8; --line: #252C40;
+    --accent: #7C8BFF; --accent-ink: #0A0D16; --hi: #FFC940; --ok: #5CC98B; --bad: #FF8A80;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.7;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 40px;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.25; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.label { font-family: var(--font-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+.brand svg { width: 28px; height: 28px; flex: none; }
+.pill { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 16px; font-size: 14px; }
+nav.nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+nav.nav::-webkit-scrollbar { display: none; }
+nav.nav a { color: var(--fg); text-decoration: none; font-size: 14px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 14px; white-space: nowrap; }
+nav.nav a:hover { border-color: var(--accent); }
+
+.hero { display: grid; gap: 28px; padding-block: 24px 44px; align-items: center; }
+@media (min-width: 780px) { .hero { grid-template-columns: 1.15fr .85fr; } }
+.hero h1 { font-size: clamp(30px, 7vw, 52px); font-weight: 700; }
+.hero .lead { color: var(--muted); font-size: 17px; margin-top: 14px; max-width: 54ch; }
+.hero .cta-row { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.hero .meta { color: var(--muted); font-size: 14px; }
+.btn { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px; padding: 12px 24px; font-weight: 700; text-decoration: none; display: inline-block; text-align: center; }
+.btn:disabled { opacity: .6; cursor: default; }
+.btn2 { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 14px; font-size: 14px; text-decoration: none; color: var(--fg); display: inline-block; }
+.btn2:hover { border-color: var(--accent); }
+.btn2:disabled { opacity: .55; cursor: default; }
+.sample { position: relative; max-width: 380px; width: 100%; margin-inline: auto; }
+.sample img { width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 0 0 1px var(--line), 0 18px 40px -18px rgba(13, 18, 32, .45); background: #fff; }
+.sample .tag { position: absolute; top: 10px; inset-inline-start: 10px; background: var(--hi); color: #0D1220; font-family: var(--font-data); font-size: 12px; padding: 2px 8px; border-radius: 3px; }
+
+section { padding-block: 40px; border-top: 1px solid var(--line); }
+section > h2 { font-size: clamp(22px, 4.5vw, 32px); }
+section > p.sub { color: var(--muted); margin-top: 8px; max-width: 62ch; }
+
+.tabs { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); margin-top: 22px; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 18px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--accent); }
+.studio { display: grid; gap: 22px; margin-top: 22px; }
+@media (min-width: 900px) { .studio { grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); align-items: start; } }
+.form { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.f { display: grid; gap: 6px; min-width: 0; }
+.f > .lb { font-size: 14px; color: var(--muted); }
+.f input[type="text"], .f select, .f textarea { width: 100%; min-width: 0; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+.f textarea { resize: vertical; min-height: 96px; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 2px 12px; font-size: 13px; text-align: start; }
+.chip:hover:not(:disabled) { border-color: var(--accent); }
+.chip:disabled { opacity: .55; cursor: default; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.checks label { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 4px 12px; font-size: 14px; cursor: pointer; }
+.checks input { accent-color: var(--accent); }
+.hint { font-size: 13px; color: var(--muted); }
+details.kit { border: 1px solid var(--line); border-radius: 6px; background: var(--bg); margin: 0; }
+details.kit summary { padding: 10px 12px; font-size: 14px; font-weight: 600; }
+details.kit .kitbody { padding: 0 12px 12px; display: grid; gap: 10px; }
+.colors { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; font-size: 14px; }
+.colors label.cb { display: inline-flex; align-items: center; gap: 6px; }
+.colors input[type="color"] { width: 36px; height: 30px; padding: 0; border: 1px solid var(--line); border-radius: 4px; background: none; }
+.out { min-width: 0; display: grid; gap: 22px; }
+.empty { border: 1px dashed var(--line); border-radius: 8px; padding: 28px 18px; color: var(--muted); text-align: center; }
+.status { color: var(--muted); padding: 18px 0; }
+.status.err { color: var(--bad); }
+.item { padding-block: 18px; border-top: 1px solid var(--line); display: grid; gap: 12px; min-width: 0; }
+.item:first-child { border-top: 0; padding-top: 0; }
+.item .txt { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 16px; line-height: 1.75; }
+.item .tags { color: var(--accent); font-size: 14px; overflow-wrap: anywhere; }
+.item .vis { color: var(--muted); font-size: 14px; }
+.item .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.item h3 { font-size: 18px; }
+.count { font-family: var(--font-data); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.count.over { color: var(--bad); }
+.refine { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+.editor { display: grid; gap: 14px; min-width: 0; }
+.edprev { display: grid; gap: 10px; align-content: start; justify-items: start; }
+.edprev img { width: 100%; max-width: 440px; height: auto; display: block; border: 1px solid var(--line); border-radius: 4px; background: #fff; }
+.acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.edctl { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.edctl > summary { padding: 10px 14px; font-weight: 600; font-size: 14px; }
+.edbody { padding: 0 14px 14px; display: grid; gap: 12px; }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.sw { width: 44px; height: 30px; border-radius: 6px; border: 2px solid var(--line); padding: 0; }
+.sw[aria-pressed="true"] { border-color: var(--accent); }
+.thumbs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.thumb { flex: none; width: 84px; padding: 0; border: 2px solid var(--line); border-radius: 4px; background: #fff; overflow: hidden; }
+.thumb[aria-pressed="true"] { border-color: var(--accent); }
+.thumb img { width: 100%; height: auto; display: block; }
+.camp { display: grid; gap: 14px; padding-block: 20px; border-top: 1px solid var(--line); min-width: 0; }
+.camp:first-child { border-top: 0; padding-top: 0; }
+.camp h3 { font-size: 18px; }
+@media (min-width: 700px) { .camp { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } .camp > h3 { grid-column: 1 / -1; } }
+
+details.hist { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+details.hist summary { padding: 10px 14px; font-weight: 600; font-size: 14px; }
+.histlist { padding: 0 14px 14px; display: grid; gap: 6px; }
+.histrow { display: flex; gap: 8px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 8px; }
+.histrow button.go { background: none; border: 0; padding: 0; text-align: start; color: var(--fg); font-size: 14px; overflow-wrap: anywhere; }
+.histrow button.go:hover { color: var(--accent); }
+
+.svc { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding-block: 16px; border-top: 1px solid var(--line); }
+#svcList { margin-top: 18px; }
+.svc h3 { font-size: 18px; }
+.svc p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+ol.steps { list-style: none; margin: 18px 0 0; padding: 0; counter-reset: s; display: grid; }
+ol.steps li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding-block: 16px; border-top: 1px solid var(--line); counter-increment: s; }
+ol.steps li::before { content: counter(s); font-family: var(--font-data); font-size: 22px; color: var(--accent); }
+ol.steps h3 { font-size: 17px; }
+ol.steps p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+
+.plan { margin-top: 20px; max-width: 460px; background: var(--surface); border: 2px solid var(--accent); border-radius: 8px; padding: 22px; display: grid; gap: 14px; }
+.plan .price { font-family: var(--font-data); font-size: 44px; font-weight: 500; line-height: 1; }
+.plan .price small { font-size: 16px; color: var(--muted); }
+.plan .free { justify-self: start; background: var(--hi); color: #0D1220; font-family: var(--font-data); font-size: 13px; padding: 2px 10px; border-radius: 3px; }
+.plan ul { margin: 0; padding: 0; padding-inline-start: 20px; display: grid; gap: 4px; }
+.pay { margin-top: 28px; display: grid; gap: 12px; }
+.pay h3 { font-size: 20px; }
+.paygrid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.paycard { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 10px; min-width: 0; align-content: start; }
+.paycard.rec { border-color: var(--accent); }
+.paycard .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.paycard .coin { font-family: var(--font-display); font-weight: 700; font-size: 22px; }
+.chipnet { font-family: var(--font-data); font-size: 12px; border: 1px solid currentColor; border-radius: 4px; padding: 2px 8px; color: var(--accent); white-space: nowrap; }
+.paycard .warn { font-size: 14px; color: var(--bad); font-weight: 600; }
+.paycard .addr { font-family: var(--font-data); font-size: 14px; direction: ltr; text-align: left; unicode-bidi: isolate; overflow-wrap: anywhere; word-break: break-all; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; user-select: all; }
+.paycard .small { font-size: 13px; color: var(--muted); }
+.note { color: var(--muted); font-size: 14px; max-width: 62ch; }
+section .note { margin-top: 12px; }
+
+details.faq { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; margin-top: 10px; }
+details.faq summary { list-style: none; cursor: pointer; padding: 14px 16px; display: flex; gap: 12px; align-items: center; font-family: var(--font-display); font-weight: 600; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after { content: "+"; margin-inline-start: auto; font-family: var(--font-data); color: var(--muted); }
+details.faq[open] summary::after { content: "\2212"; }
+details.faq p { padding: 0 16px 14px; color: var(--muted); }
+#faqList { margin-top: 18px; }
+
+.contact { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.contact .num { font-family: var(--font-data); font-size: 20px; direction: ltr; unicode-bidi: isolate; user-select: all; }
+footer { padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="7" fill="var(--accent)"/><path d="M8 23V9l8 9 8-9v14" fill="none" stroke="var(--accent-ink)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="25" cy="7" r="3" fill="var(--hi)"/></svg>
+      Mero Studio
+    </div>
+    <button class="pill" id="langBtn" type="button" aria-label="Language">EN</button>
+  </header>
+  <nav class="nav" id="nav"></nav>
+
+  <div class="hero">
+    <div>
+      <h1 data-i="h1"></h1>
+      <p class="lead" data-i="lead"></p>
+      <div class="cta-row">
+        <a class="btn" href="#studio" data-i="cta"></a>
+        <span class="meta" data-i="heroMeta"></span>
+      </div>
+    </div>
+    <div class="sample">
+      <img id="sampleImg" alt="">
+      <span class="tag" data-i="sampleTag"></span>
+    </div>
+  </div>
+
+  <section id="studio">
+    <h2 data-i="studioT"></h2>
+    <p class="sub" data-i="studioS"></p>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="studio">
+      <form class="form" id="form" novalidate>
+        <details class="kit" id="kit">
+          <summary data-i="kitT"></summary>
+          <div class="kitbody">
+            <p class="hint" data-i="kitS"></p>
+            <div class="f"><span class="lb" data-i="lBrand"></span><input id="brand" type="text" maxlength="60" autocomplete="off" aria-label="brand"></div>
+            <div class="f"><span class="lb" data-i="lAbout"></span><textarea id="about" rows="2" maxlength="300" aria-label="about"></textarea></div>
+            <div class="colors">
+              <label class="cb"><input type="checkbox" id="useColors"><span data-i="useColors"></span></label>
+              <label class="cb"><span data-i="c1"></span><input type="color" id="c1" value="#2B3BFF"></label>
+              <label class="cb"><span data-i="c2"></span><input type="color" id="c2" value="#FFB800"></label>
+            </div>
+          </div>
+        </details>
+        <div class="f">
+          <label class="lb" for="brief" id="briefLbl"></label>
+          <textarea id="brief" rows="4" maxlength="800"></textarea>
+          <div class="chips" id="chips"></div>
+        </div>
+        <div class="f" data-for="campaign">
+          <span class="lb" data-i="lPlatforms"></span>
+          <div class="checks" id="campPlat"></div>
+        </div>
+        <div class="f" data-for="write">
+          <label class="lb" for="source" data-i="lSource"></label>
+          <textarea id="source" rows="3" maxlength="1500"></textarea>
+        </div>
+        <div class="row2">
+          <div class="f" data-for="posts ads"><label class="lb" for="platform" data-i="lPlatform"></label><select id="platform"></select></div>
+          <div class="f" data-for="design"><label class="lb" for="format" data-i="lFormat"></label><select id="format"></select></div>
+          <div class="f" data-for="write"><label class="lb" for="kind" data-i="lKind"></label><select id="kind"></select></div>
+          <div class="f" data-for="write"><label class="lb" for="length" data-i="lLength"></label><select id="length"></select></div>
+        </div>
+        <div class="f" data-for="ads"><label class="lb" for="offer" data-i="lOffer"></label><input id="offer" type="text" maxlength="120" autocomplete="off"></div>
+        <div class="f" data-for="ads"><label class="lb" for="audience" data-i="lAudience"></label><input id="audience" type="text" maxlength="120" autocomplete="off"></div>
+        <div class="row2">
+          <div class="f"><label class="lb" for="tone" data-i="lTone"></label><select id="tone"></select></div>
+          <div class="f"><label class="lb" for="outLang" data-i="lOut"></label><select id="outLang"></select></div>
+        </div>
+        <button class="btn" id="go" type="submit"></button>
+        <p class="hint" id="tabHint"></p>
+      </form>
+      <div class="out">
+        <div id="out" aria-live="polite"></div>
+        <details class="hist" id="histBox">
+          <summary data-i="histT"></summary>
+          <div class="histlist" id="histList"></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <h2 data-i="svcT"></h2>
+    <div id="svcList"></div>
+  </section>
+
+  <section id="how">
+    <h2 data-i="howT"></h2>
+    <ol class="steps" id="howList"></ol>
+  </section>
+
+  <section id="pricing">
+    <h2 data-i="priceT"></h2>
+    <p class="sub" data-i="priceS"></p>
+    <div class="plan">
+      <h3 data-i="planName"></h3>
+      <div class="price">$15 <small data-i="perMonth"></small></div>
+      <span class="free" data-i="trial"></span>
+      <ul id="planList"></ul>
+      <a class="btn" id="waPlan" href="#pay" data-i="startWa"></a>
+    </div>
+    <div class="pay" id="pay">
+      <h3 data-i="payT"></h3>
+      <p class="note" data-i="payS"></p>
+      <div class="paygrid" id="payList"></div>
+      <p class="note" data-i="payAfter"></p>
+    </div>
+    <p class="note" data-i="priceNote"></p>
+  </section>
+
+  <section id="faq">
+    <h2 data-i="faqT"></h2>
+    <div id="faqList"></div>
+  </section>
+
+
+  <footer data-i="foot"></footer>
+</div>
+
+<script>
+/* ========== Text ========== */
+var L = {
+ar: {
+ h1: "منشوراتك وتصاميمك وإعلاناتك وكتابتك، من أمر واحد",
+ lead: "اكتب جملة وحدة بتوصفلنا شو بدك، وبيطلعلك منشور وتصميم لكل منصة بنفس الألوان والهوية، بسبع لغات.",
+ cta: "جرّب الاستوديو مجاناً", heroMeta: "بدون تسجيل", sampleTag: "مثال",
+ studioT: "الاستوديو", studioS: "اختار نوع الشغل، اكتب فكرتك، واضغط. النتيجة بتظهر خلال ثواني وبتقدر تعدّل عليها.",
+ tabs: { campaign: "حملة بأمر واحد", posts: "منشورات", design: "تصاميم", ads: "إعلانات", write: "كتابة" },
+ briefLbl: { campaign: "اكتب أمرك بجملة وحدة", posts: "شو بدك تنشر؟", design: "شو موضوع التصميم؟", ads: "شو بدك تعلن عنه؟", write: "شو بدك نكتبلك؟" },
+ kitT: "هويتي (اختياري)", kitS: "بتنحفظ على جهازك وبتنطبق على كل الأدوات.", lBrand: "اسم العلامة أو المحل", lAbout: "نبذة قصيرة عن نشاطك",
+ useColors: "استخدم ألواني بالتصاميم", c1: "الأساسي", c2: "المساعد",
+ lPlatforms: "المنصات", lSource: "نص بدك نشتغل عليه (للترجمة أو إعادة الصياغة)",
+ lPlatform: "المنصة", lFormat: "المقاس", lKind: "نوع النص", lLength: "الطول", lOffer: "العرض (اختياري)", lAudience: "الجمهور (اختياري)",
+ lTone: "الأسلوب", lOut: "لغة النتيجة",
+ gen: { campaign: "جهّز الحملة", posts: "اكتب المنشورات", design: "صمّم", ads: "اكتب الإعلانات", write: "اكتب النص" },
+ loading: "عم نشتغل على طلبك...", short: "اكتب فكرتك بجملة أو أكثر.", platErr: "اختار منصة وحدة على الأقل.",
+ busy: "في ضغط حالياً، جرّب بعد دقيقة.", fail: "ما قدرنا ننفذ الطلب هلق، جرّب مرة ثانية.", declined: "ما منقدر ننفذ هالطلب.", notConn: "الخدمة غير متصلة بالذكاء الاصطناعي حالياً.",
+ empty: "النتيجة بتظهر هنا.",
+ hints: { campaign: "منشور وتصميم لكل منصة بنفس الألوان والهوية، جاهزين للنسخ والتنزيل.", posts: "3 خيارات بزوايا مختلفة مع فكرة للصورة.", design: "3 تصاميم طباعية (عنوان وألوان وتخطيط). مو صور فوتوغرافية. بتقدر تعدّل وتنزّل PNG أو SVG.", ads: "3 نسخ بزوايا مختلفة، مع عدّاد حروف حسب المنصة.", write: "اكتب، ترجم، أو أعد صياغة نص." },
+ copy: "نسخ", copied: "تم النسخ", option: "الخيار", angle: "الزاوية", visualIdea: "فكرة الصورة: ",
+ dlPng: "تنزيل PNG", dlSvg: "تنزيل SVG", reviewNote: "راجع النص قبل النشر. الذكاء الاصطناعي ممكن يغلط.",
+ ref: { shorter: "اختصر", longer: "أطول", punchier: "أقوى", formal: "أكثر رسمية", casual: "أكثر عفوية", fix: "صحّح" }, undo: "تراجع", refineFail: "ما قدرنا نعدّل النص هلق.",
+ ed: { controls: "تعديل التصميم", head: "العنوان", sub: "الوصف", cta: "الزر", hi: "رقم أو كلمة بارزة", layout: "التخطيط", motif: "الخلفية", palette: "ألوان جاهزة", bg: "الخلفية", fg: "النص", accent: "المميز", format: "المقاس", reset: "رجوع للأصل" },
+ layoutN: { poster: "ملصق", editorial: "تحريري", band: "شريط", diagonal: "قطري", frame: "إطار", split: "مقسوم", stat: "رقم بارز", badge: "شارة" },
+ motifN: { circles: "دوائر", stripes: "خطوط", grid: "شبكة", dots: "نقاط", none: "بدون" },
+ histT: "آخر نتائجك", histEmpty: "ما في نتائج محفوظة بعد.", histClear: "مسح السجل",
+ svcT: "شو منقدم",
+ svc: [["campaign", "حملة بأمر واحد", "جملة وحدة بتعطيك منشور وتصميم لكل منصة: إكس، لينكدإن، إنستغرام، فيسبوك."], ["posts", "منشورات سوشيال ميديا", "3 خيارات بزوايا مختلفة مع هاشتاغات وفكرة للصورة."], ["design", "تصاميم جرافيك", "8 تخطيطات ومحرر تعديل، وتنزيل بمقاسات المنصات."], ["ads", "إعلانات", "نسخ إعلانية قصيرة تحترم حدود الحروف لكل منصة."], ["write", "كتابة محتوى وكتابة عامة", "مقالات، سكريبتات فيديو، أوصاف منتجات، إيميلات، سيرة ذاتية، ترجمة."]],
+ tryIt: "جرّب",
+ howT: "كيف بيشتغل",
+ how: [["اكتب أمرك", "جملة أو اثنتين تكفي. وإذا بدك احفظ هويتك مرة وحدة: الاسم والنبذة والألوان."], ["اختار اللغة والأسلوب", "سبع لغات وست نبرات، من ودّي لراقي."], ["عدّل وانسخ أو نزّل", "حسّن النص بضغطة، عدّل التصميم، وبعدين انسخ أو نزّل."]],
+ priceT: "السعر", priceS: "خطة وحدة بسيطة.",
+ payT: "طرق الدفع", payS: "الدفع بعملات رقمية مستقرة. اختار الشبكة الصحيحة بالضبط قبل ما تحوّل.",
+ payOnly: "أرسل {coin} فقط عبر شبكة {net}. أي عملة أو شبكة تانية بتضيّع الفلوس.", payAddr: "عنوان المحفظة", payCheck: "تحقق: يبدأ بـ {a} وينتهي بـ {b}", payCopy: "نسخ العنوان",
+ payLow: "رسوم الشبكة أقل عادةً", payHigh: "رسوم شبكة Ethereum غالباً أعلى، فانتبه للمبالغ الصغيرة.",
+ payAfter: "بعد الدفع احتفظ برقم المعاملة (TXID). الدفع والتفعيل يدويان بعد التأكد من وصول المبلغ.",
+ planName: "الخطة الاحترافية", perMonth: "/ شهر", trial: "أول 3 أيام مجاناً",
+ plan: ["حملات ومنشورات وإعلانات وتصاميم وكتابة", "سبع لغات", "ضمن حدود الاستخدام العادل"],
+ startWa: "اشترك الآن",
+ priceNote: "الاشتراك بيتم حالياً بالعملات الرقمية. والاستوديو فوق مجاني للتجربة بحد يومي.",
+ faqT: "أسئلة شائعة",
+ faq: [["بقدر أجرّب بدون تسجيل؟", "إي. الاستوديو فوق مفتوح للتجربة بحد يومي وبحد على عدد الطلبات بالدقيقة."], ["شو نوع التصاميم؟", "تصاميم طباعية فيها عنوان وألوان وتخطيط مدروس، بتعدّل عليها وبتنزّلها PNG أو SVG. مو صور فوتوغرافية، وما فيها شعارات أو علامات مسجلة."], ["هل التصاميم أصلية بدون ذكاء اصطناعي؟", "لا. هي مولّدة بالذكاء الاصطناعي من قوالب. إذا شغلك أو عميلك بيشترط تصاميم بدون ذكاء اصطناعي، لا تستخدمها."], ["المحتوى جاهز للنشر مباشرة؟", "راجعه قبل النشر. الذكاء الاصطناعي ممكن يغلط، والأرقام والأسعار بتحطها إنت بدل الأقواس المربعة."], ["بتضمنوا مبيعات أو تفاعل؟", "لا. منعطيك محتوى، والنتائج بتعتمد على نشاطك وجمهورك."], ["بتخزنوا اللي بكتبه؟", "ما منخزّن نصوصك على السيرفر. بتنرسل لخدمة Google Gemini لتوليد المحتوى، فلا تكتب معلومات سرية. هويتك والسجل بيتخزنوا على جهازك بس."], ["شو اللغات المدعومة؟", "العربية والإنجليزية والفرنسية والألمانية والإسبانية والتركية والروسية."]],
+  foot: "Mero Studio. المحتوى المولّد بالذكاء الاصطناعي يحتاج مراجعتك قبل النشر.",
+ tones: [["friendly", "ودّي"], ["professional", "احترافي"], ["funny", "مرح"], ["inspiring", "ملهم"], ["urgent", "حماسي للبيع"], ["luxury", "راقي"]],
+ platP: [["instagram", "إنستغرام"], ["facebook", "فيسبوك"], ["tiktok", "تيك توك"], ["x", "إكس"], ["linkedin", "لينكدإن"], ["telegram", "تيليغرام"]],
+ platA: [["meta", "فيسبوك وإنستغرام"], ["google", "إعلانات بحث Google"], ["tiktok", "تيك توك"], ["linkedin", "لينكدإن"]],
+ platC: [["x", "إكس"], ["linkedin", "لينكدإن"], ["instagram", "إنستغرام"], ["facebook", "فيسبوك"]],
+ formats: [["square", "مربع 1080×1080"], ["portrait", "عمودي 1080×1350 (إنستغرام)"], ["story", "ستوري 1080×1920"], ["landscape", "أفقي 1200×628 (لينكدإن، فيسبوك)"], ["x", "إكس 1600×900"]],
+ kinds: [["general", "نص عام"], ["article", "مقال"], ["product", "وصف منتج"], ["email", "إيميل"], ["script", "سكريبت فيديو"], ["bio", "نبذة للبروفايل"], ["cv", "سيرة ذاتية"], ["letter", "رسالة تقديم"], ["translate", "ترجمة"], ["rewrite", "إعادة صياغة"]],
+ lengths: [["short", "قصير"], ["medium", "متوسط"], ["long", "طويل"]],
+ examples: {
+  campaign: ["جهّزلي حملة افتتاح مطعم شاورما جديد", "حملة تخفيضات نهاية الموسم لمحل أحذية رياضية"],
+  posts: ["افتتاح مقهى جديد بالمزة بعروض الأسبوع الأول", "محل ملابس نسائية ينزّل تشكيلة الشتاء"],
+  design: ["إعلان تخفيضات نهاية الموسم على الأحذية الرياضية", "دعوة لافتتاح مطعم شاورما جديد"],
+  ads: ["دورة إنجليزي أونلاين للمبتدئين بسعر مخفض", "خدمة توصيل طعام صحي للبيوت"],
+  write: ["مقال عن فوائد القراءة اليومية للشباب", "وصف لساعة يد جلدية كلاسيكية للبيع"]
+ },
+ sample: { headline: "قهوة الصباح بنكهة جديدة", subline: "حبوب مختارة وتحميص طازج كل يوم", cta: "اطلب الآن", highlight: "20%", brand: "Café Nour" }
+},
+en: {
+ h1: "Your posts, designs, ads and writing, from one command",
+ lead: "Write one sentence about what you need and get a post and a design for each platform, in the same colors and identity, in seven languages.",
+ cta: "Try the studio free", heroMeta: "No sign-up", sampleTag: "Sample",
+ studioT: "The studio", studioS: "Pick the kind of work, write your idea and press go. Results arrive in seconds and you can edit them.",
+ tabs: { campaign: "One-command campaign", posts: "Posts", design: "Designs", ads: "Ads", write: "Writing" },
+ briefLbl: { campaign: "Write your command in one sentence", posts: "What do you want to post about?", design: "What is the design about?", ads: "What are you advertising?", write: "What should we write?" },
+ kitT: "My brand (optional)", kitS: "Saved on your device and applied to every tool.", lBrand: "Brand or shop name", lAbout: "A short note about your business",
+ useColors: "Use my colors in designs", c1: "Primary", c2: "Secondary",
+ lPlatforms: "Platforms", lSource: "Text to work on (for translation or rewriting)",
+ lPlatform: "Platform", lFormat: "Size", lKind: "Type of text", lLength: "Length", lOffer: "Offer (optional)", lAudience: "Audience (optional)",
+ lTone: "Tone", lOut: "Output language",
+ gen: { campaign: "Build the campaign", posts: "Write the posts", design: "Design", ads: "Write the ads", write: "Write the text" },
+ loading: "Working on your request...", short: "Write your idea in a sentence or more.", platErr: "Pick at least one platform.",
+ busy: "We are busy right now. Try again in a minute.", fail: "We could not complete the request right now. Please try again.", declined: "We cannot do this request.", notConn: "The AI service is not connected right now.",
+ empty: "Your result appears here.",
+ hints: { campaign: "A post and a design per platform in one shared palette, ready to copy and download.", posts: "3 options with different angles and a visual idea.", design: "3 typographic designs (headline, colors, layout), not photographs. Edit them and download PNG or SVG.", ads: "3 variants with different angles and a character counter for the platform.", write: "Write, translate or rewrite a text." },
+ copy: "Copy", copied: "Copied", option: "Option", angle: "Angle", visualIdea: "Visual idea: ",
+ dlPng: "Download PNG", dlSvg: "Download SVG", reviewNote: "Review the text before publishing. AI can make mistakes.",
+ ref: { shorter: "Shorter", longer: "Longer", punchier: "Punchier", formal: "More formal", casual: "More casual", fix: "Fix" }, undo: "Undo", refineFail: "We could not edit the text right now.",
+ ed: { controls: "Edit the design", head: "Headline", sub: "Subline", cta: "Button", hi: "Big number or word", layout: "Layout", motif: "Background", palette: "Ready palettes", bg: "Background", fg: "Text", accent: "Accent", format: "Size", reset: "Reset" },
+ layoutN: { poster: "Poster", editorial: "Editorial", band: "Band", diagonal: "Diagonal", frame: "Frame", split: "Split", stat: "Big number", badge: "Badge" },
+ motifN: { circles: "Circles", stripes: "Stripes", grid: "Grid", dots: "Dots", none: "None" },
+ histT: "Your recent results", histEmpty: "No saved results yet.", histClear: "Clear history",
+ svcT: "What we do",
+ svc: [["campaign", "One-command campaign", "One sentence gives you a post and a design for each platform: X, LinkedIn, Instagram, Facebook."], ["posts", "Social media posts", "3 options with different angles, hashtags and a visual idea."], ["design", "Graphic designs", "8 layouts and an editor, downloadable in platform sizes."], ["ads", "Ads", "Short ad copy that respects each platform's character limits."], ["write", "Content and general writing", "Articles, video scripts, product descriptions, emails, CVs, translation."]],
+ tryIt: "Try it",
+ howT: "How it works",
+ how: [["Write your command", "A sentence or two is enough. Save your brand once if you like: name, note and colors."], ["Pick language and tone", "Seven languages and six tones, from friendly to premium."], ["Edit, then copy or download", "Refine the text in one tap, adjust the design, then copy or download."]],
+ priceT: "Price", priceS: "One simple plan.",
+ payT: "Payment methods", payS: "Pay with stablecoins. Choose the exact network before you send.",
+ payOnly: "Send {coin} only on the {net} network. Any other coin or network will be lost.", payAddr: "Wallet address", payCheck: "Check: starts with {a} and ends with {b}", payCopy: "Copy address",
+ payLow: "Usually lower network fees", payHigh: "Ethereum network fees are often higher, so mind small amounts.",
+ payAfter: "After paying, keep your transaction ID (TXID). Payment and activation are manual once the amount arrives.",
+ planName: "Professional plan", perMonth: "/ month", trial: "First 3 days free",
+ plan: ["Campaigns, posts, ads, designs and writing", "Seven languages", "Within fair use limits"],
+ startWa: "Subscribe now",
+ priceNote: "Subscriptions are paid in crypto for now. The studio above is free to try with a daily limit.",
+ faqT: "Frequently asked questions",
+ faq: [["Can I try it without signing up?", "Yes. The studio above is open for trial with a daily limit and a per-minute request limit."], ["What kind of designs are these?", "Typographic designs with a headline, colors and a considered layout that you can edit and download as PNG or SVG. They are not photographs and contain no logos or registered brands."], ["Are the designs original, made without AI?", "No. They are generated by AI from templates. If your job or client requires designs made without AI, do not use them."], ["Is the content ready to publish as is?", "Review it first. AI can make mistakes, and numbers and prices are for you to fill in where you see square brackets."], ["Do you guarantee sales or engagement?", "No. We give you content, and results depend on your business and audience."], ["Do you store what I write?", "We do not store your text on our server. It is sent to Google Gemini to generate the content, so do not enter confidential information. Your brand and history are stored on your device only."], ["Which languages are supported?", "Arabic, English, French, German, Spanish, Turkish and Russian."]],
+  foot: "Mero Studio. AI-generated content needs your review before publishing.",
+ tones: [["friendly", "Friendly"], ["professional", "Professional"], ["funny", "Funny"], ["inspiring", "Inspiring"], ["urgent", "Sales-driven"], ["luxury", "Premium"]],
+ platP: [["instagram", "Instagram"], ["facebook", "Facebook"], ["tiktok", "TikTok"], ["x", "X"], ["linkedin", "LinkedIn"], ["telegram", "Telegram"]],
+ platA: [["meta", "Facebook and Instagram"], ["google", "Google Search ads"], ["tiktok", "TikTok"], ["linkedin", "LinkedIn"]],
+ platC: [["x", "X"], ["linkedin", "LinkedIn"], ["instagram", "Instagram"], ["facebook", "Facebook"]],
+ formats: [["square", "Square 1080x1080"], ["portrait", "Portrait 1080x1350 (Instagram)"], ["story", "Story 1080x1920"], ["landscape", "Landscape 1200x628 (LinkedIn, Facebook)"], ["x", "X 1600x900"]],
+ kinds: [["general", "General text"], ["article", "Article"], ["product", "Product description"], ["email", "Email"], ["script", "Video script"], ["bio", "Profile bio"], ["cv", "CV"], ["letter", "Cover letter"], ["translate", "Translation"], ["rewrite", "Rewrite"]],
+ lengths: [["short", "Short"], ["medium", "Medium"], ["long", "Long"]],
+ examples: {
+  campaign: ["Prepare a campaign for the opening of a new shawarma restaurant", "End-of-season sale campaign for a running shoes shop"],
+  posts: ["Opening a new coffee shop with first-week offers", "A women's clothing shop launches its winter collection"],
+  design: ["End-of-season sale on running shoes", "Invitation to the opening of a new shawarma restaurant"],
+  ads: ["Online English course for beginners at a reduced price", "Healthy meal delivery to homes"],
+  write: ["An article on the benefits of daily reading for young people", "A description of a classic leather watch for sale"]
+ },
+ sample: { headline: "Your morning coffee, reimagined", subline: "Selected beans, roasted fresh every day", cta: "Order now", highlight: "20%", brand: "Café Nour" }
+}};
+var OUTLANGS = [["ar", "العربية"], ["en", "English"], ["fr", "Français"], ["de", "Deutsch"], ["es", "Español"], ["tr", "Türkçe"], ["ru", "Русский"]];
+var TABS = ["campaign", "posts", "design", "ads", "write"];
+var ENDPOINT = { campaign: "/api/campaign", posts: "/api/posts", design: "/api/design", ads: "/api/ads", write: "/api/write" };
+var LAYOUTS = ["poster", "editorial", "band", "diagonal", "frame", "split", "stat", "badge"];
+var MOTIFS = ["circles", "stripes", "grid", "dots", "none"];
+var PRESETS = [
+  ["#0D1220", "#F3F4F7", "#FFB800"], ["#0B2545", "#EAF2FF", "#13B5EA"], ["#0F2A24", "#EAF7F2", "#2FD6A0"], ["#2A1033", "#FBEFFF", "#FF6FB5"],
+  ["#FAF8F2", "#1A1A1A", "#D9480F"], ["#FFFFFF", "#111111", "#2B3BFF"], ["#FF5A36", "#FFFFFF", "#1B1033"], ["#2B3BFF", "#FFFFFF", "#FFB800"]
+];
+
+/* ========== Design engine ========== */
+var FONT = "Tahoma, 'Noto Sans Arabic', 'Segoe UI', Arial, sans-serif";
+var FORMATS = { square: [1080, 1080], portrait: [1080, 1350], story: [1080, 1920], landscape: [1200, 628], x: [1600, 900] };
+var CAMP_FORMAT = { x: "x", linkedin: "landscape", instagram: "portrait", facebook: "landscape" };
+var mctx = document.createElement("canvas").getContext("2d");
+function measure(t, size, weight) { mctx.font = weight + " " + size + "px " + FONT; return mctx.measureText(t).width; }
+function wrap(text, size, weight, maxW) {
+  var words = String(text).split(" "), lines = [], cur = "";
+  words.forEach(function (w) {
+    var t = cur ? cur + " " + w : w;
+    if (!cur || measure(t, size, weight) <= maxW) cur = t; else { lines.push(cur); cur = w; }
+  });
+  if (cur) lines.push(cur);
+  return lines;
+}
+function widest(lines, size, weight) { var m = 0; lines.forEach(function (l) { m = Math.max(m, measure(l, size, weight)); }); return m; }
+function fitBox(text, maxW, maxH, maxSize, minSize, weight, lh) {
+  var s = Math.round(maxSize), lines;
+  for (; s >= minSize; s -= 2) {
+    lines = wrap(text, s, weight, maxW);
+    if (lines.length * s * lh <= maxH && widest(lines, s, weight) <= maxW + 0.5) return { size: s, lines: lines, h: lines.length * s * lh };
+  }
+  s = Math.round(minSize);
+  lines = wrap(text, s, weight, maxW);
+  var cap = Math.max(1, Math.floor(maxH / (s * lh)));
+  lines = lines.slice(0, cap);
+  var wd = widest(lines, s, weight);
+  if (wd > maxW && wd > 0) s = Math.max(8, Math.floor(s * maxW / wd));
+  return { size: s, lines: lines, h: lines.length * s * lh };
+}
+function rgb(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+function lum(h) {
+  var c = rgb(h).map(function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+}
+function cr(a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+function readable(bg, fg) { return cr(bg, fg) >= 4.5 ? fg : (lum(bg) > 0.4 ? "#0B0F14" : "#FFFFFF"); }
+function onColor(c) { return lum(c) > 0.35 ? "#0B0F14" : "#FFFFFF"; }
+function mix(a, b, t) {
+  var x = rgb(a), y = rgb(b);
+  return "#" + [0, 1, 2].map(function (i) { return ("0" + Math.round(x[i] * (1 - t) + y[i] * t).toString(16)).slice(-2); }).join("");
+}
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+function n(v) { return Math.round(v * 10) / 10; }
+function validHex(v, d) { return /^#[0-9a-fA-F]{6}$/.test(v || "") ? v : d; }
+
+function motif(m, W, H, u, ac, fg) {
+  if (m === "circles") {
+    return '<circle cx="' + n(W * 0.92) + '" cy="' + n(H * 0.08) + '" r="' + n(u * 0.36) + '" fill="' + ac + '" opacity=".16"/>' +
+      '<circle cx="' + n(W * 0.04) + '" cy="' + n(H * 0.96) + '" r="' + n(u * 0.28) + '" fill="' + ac + '" opacity=".12"/>' +
+      '<circle cx="' + n(W * 0.84) + '" cy="' + n(H * 0.88) + '" r="' + n(u * 0.17) + '" fill="none" stroke="' + ac + '" stroke-width="' + n(u * 0.006) + '" opacity=".4"/>';
+  }
+  if (m === "stripes") {
+    return '<defs><pattern id="p" width="44" height="44" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><rect width="14" height="44" fill="' + ac + '" opacity=".13"/></pattern></defs><rect width="' + W + '" height="' + H + '" fill="url(#p)"/>';
+  }
+  if (m === "grid") {
+    var out = "", step = u / 10, i;
+    for (i = 1; i < W / step; i++) out += '<line x1="' + n(i * step) + '" y1="0" x2="' + n(i * step) + '" y2="' + H + '"/>';
+    for (i = 1; i < H / step; i++) out += '<line x1="0" y1="' + n(i * step) + '" x2="' + W + '" y2="' + n(i * step) + '"/>';
+    return '<g stroke="' + fg + '" stroke-width="1.5" opacity=".08">' + out + '</g>';
+  }
+  if (m === "dots") {
+    return '<defs><pattern id="p" width="38" height="38" patternUnits="userSpaceOnUse"><circle cx="19" cy="19" r="3.4" fill="' + ac + '" opacity=".28"/></pattern></defs><rect width="' + W + '" height="' + H + '" fill="url(#p)"/>';
+  }
+  return "";
+}
+
+function buildSvg(s, fmt, brand) {
+  var d = FORMATS[fmt] || FORMATS.square, W = d[0], H = d[1], u = Math.min(W, H);
+  var head = String(s.headline || ""), sub = String(s.subline || ""), hl = String(s.highlight || "");
+  var rtl = /[֐-ۿ]/.test(head + sub + hl);
+  if (rtl && hl && !/[\u0590-\u06FF]/.test(hl)) hl = "\u200E" + hl + "\u200E";
+  var bgc = validHex(s.bg, "#101828"), bg = bgc, fg = readable(bg, validHex(s.fg, "#FFFFFF")), acc = validHex(s.accent, "#2B3BFF");
+  var ac = cr(bg, acc) >= 2 ? acc : mix(acc, fg, 0.55);
+  var muted = mix(bg, fg, 0.68);
+  var pad = Math.round(u * 0.085), cx = W / 2;
+  var arrow = rtl ? "←" : "→", dir = rtl ? "rtl" : "ltr";
+  var lh = 1.16, gap = u * 0.04, ctaS = u * 0.036;
+  var cta = String(s.cta || ""), ctaLabel = cta ? cta + " " + arrow : "";
+  var layout = LAYOUTS.indexOf(s.layout) >= 0 ? s.layout : "poster";
+  if (!hl && (layout === "stat" || layout === "badge")) layout = "poster";
+  var sx = rtl ? W - pad : pad;
+  var body = "";
+
+  function T(lines, x, y, size, weight, fill, anchor, step) {
+    var o = "";
+    lines.forEach(function (l, i) {
+      o += '<text x="' + n(x) + '" y="' + n(y + i * size * (step || lh)) + '" font-size="' + n(size) + '" font-weight="' + weight + '" fill="' + fill + '" text-anchor="' + anchor + '" direction="' + dir + '" font-family="' + FONT + '">' + esc(l) + '</text>';
+    });
+    return o;
+  }
+  function brandMark(x, anchor, y, color) {
+    if (!brand) return "";
+    return T([brand], x, y, u * 0.03, 600, color || muted, anchor);
+  }
+  function block(o) {
+    var w = o.x1 - o.x0, hh = o.y1 - o.y0, gp = gap;
+    var ctaH = (cta && !o.noCta) ? ctaS * 2.3 : 0;
+    var sb = (!o.noSub && sub) ? fitBox(sub, w * 0.94, hh * (o.noHead ? 0.6 : 0.24), u * 0.04, u * 0.026, 400, 1.4) : null;
+    if (sb && o.noHead && sb.h + (ctaH ? ctaH + gp : 0) > hh) sb = null;
+    var hd = o.noHead ? null : fitBox(head, w, Math.max(u * 0.05, hh - (sb ? sb.h + gp : 0) - (ctaH ? ctaH + gp * 1.3 : 0)), o.hdMax || u * 0.108, u * 0.045, o.hdW || 800, lh);
+    var total = (hd ? hd.h : 0) + (sb ? (hd ? gp : 0) + sb.h : 0) + (ctaH ? ((hd || sb) ? gp * 1.3 : 0) + ctaH : 0);
+    var y = o.v === "top" ? o.y0 : (o.v === "bottom" ? o.y1 - total : o.y0 + (hh - total) / 2);
+    var top = y, ax = o.align === "middle" ? (o.x0 + o.x1) / 2 : (rtl ? o.x1 : o.x0), anchor = o.align === "middle" ? "middle" : "start";
+    var out = "";
+    if (hd) { out += T(hd.lines, ax, y + hd.size * 0.95, hd.size, o.hdW || 800, o.c.hd, anchor); y += hd.h; }
+    if (sb) { y += (hd ? gp : 0); out += T(sb.lines, ax, y + sb.size * 0.95, sb.size, 400, o.c.sb, anchor, 1.4); y += sb.h; }
+    if (ctaH) {
+      y += ((hd || sb) ? gp * 1.3 : 0);
+      var cw = measure(ctaLabel, ctaS, 700);
+      var left = o.align === "middle" ? ax - cw / 2 : (rtl ? ax - cw : ax);
+      if (o.ctaStyle === "pill") {
+        var pw = cw + ctaS * 2.2, px = o.align === "middle" ? ax - pw / 2 : (rtl ? ax - pw : ax);
+        out += '<rect x="' + n(px) + '" y="' + n(y) + '" width="' + n(pw) + '" height="' + n(ctaH) + '" rx="' + n(ctaH / 2) + '" fill="' + o.c.pillFill + '"/>';
+        out += T([ctaLabel], px + pw / 2, y + ctaH / 2 + ctaS * 0.34, ctaS, 700, o.c.pillText, "middle");
+      } else {
+        out += T([ctaLabel], ax, y + ctaS * 1.1, ctaS, 700, o.c.cta || fg, anchor);
+        out += '<rect x="' + n(left) + '" y="' + n(y + ctaS * 1.38) + '" width="' + n(cw) + '" height="' + n(u * 0.008) + '" fill="' + (o.c.rule || ac) + '"/>';
+      }
+      y += ctaH;
+    }
+    return { svg: out, top: top, bottom: y };
+  }
+
+  body += '<rect width="' + W + '" height="' + H + '" fill="' + bg + '"/>' + motif(s.motif, W, H, u, ac, fg);
+  var cPoster = { hd: fg, sb: muted, pillFill: ac, pillText: onColor(ac), cta: fg, rule: ac };
+
+  if (layout === "editorial") {
+    body += '<circle cx="' + (rtl ? 0 : W) + '" cy="0" r="' + n(u * 0.4) + '" fill="' + ac + '" opacity=".24"/>';
+    body += brandMark(sx, "start", pad + u * 0.03);
+    var e = block({ x0: pad, x1: W - pad, y0: pad * 2, y1: H - pad, align: "start", v: "bottom", ctaStyle: "underline", hdMax: u * 0.105, c: cPoster });
+    body += '<rect x="' + n(rtl ? sx - u * 0.12 : sx) + '" y="' + n(e.top - gap * 0.9) + '" width="' + n(u * 0.12) + '" height="' + n(u * 0.012) + '" fill="' + ac + '"/>' + e.svg;
+  } else if (layout === "band") {
+    var bandH = H * (W / H > 1.5 ? 0.34 : 0.28), onA = onColor(ac), bs = u * 0.05;
+    body += brandMark(sx, "start", pad + u * 0.02);
+    body += block({ x0: pad, x1: W - pad, y0: pad * 1.7, y1: H - bandH - pad * 0.6, align: "start", v: "top", noCta: true, hdMax: u * 0.105, c: cPoster }).svg;
+    body += '<rect x="0" y="' + n(H - bandH) + '" width="' + W + '" height="' + n(bandH) + '" fill="' + ac + '"/>';
+    var bandText = ctaLabel || hl || brand || "";
+    if (bandText) {
+      var bf = fitBox(bandText, W - 2 * pad, bandH * 0.6, bs * 1.3, bs * 0.6, 800, 1.1);
+      body += T(bf.lines, sx, H - bandH / 2 - bf.h / 2 + bf.size * 0.9, bf.size, 800, onA, "start", 1.1);
+    }
+  } else if (layout === "diagonal") {
+    var k = W / H > 1.5 ? 0.12 : 0, yS = H * (0.62 + k), yE = H * (0.46 + k);
+    var yL = rtl ? yE : yS, yR = rtl ? yS : yE, onD = onColor(ac);
+    body += '<polygon points="0,' + n(yL) + ' ' + W + ',' + n(yR) + ' ' + W + ',' + H + ' 0,' + H + '" fill="' + ac + '"/>';
+    body += brandMark(sx, "start", pad + u * 0.02);
+    body += block({ x0: pad, x1: W - pad, y0: pad * 1.7, y1: Math.min(yS, yE) - pad * 0.5, align: "start", v: "top", noSub: true, noCta: true, hdMax: u * 0.105, c: cPoster }).svg;
+    body += block({ x0: pad, x1: W - pad, y0: Math.max(yS, yE) + pad * 0.3, y1: H - pad * 0.7, align: "start", v: "middle", noHead: true, ctaStyle: "pill", c: { hd: onD, sb: onD, pillFill: bg, pillText: fg } }).svg;
+  } else if (layout === "frame") {
+    var ins = u * 0.05;
+    body += '<rect x="' + n(ins) + '" y="' + n(ins) + '" width="' + n(W - 2 * ins) + '" height="' + n(H - 2 * ins) + '" fill="none" stroke="' + ac + '" stroke-width="' + n(u * 0.01) + '"/>';
+    body += block({ x0: pad * 1.4, x1: W - pad * 1.4, y0: pad * 1.4, y1: H - pad * 1.7, align: "middle", v: "middle", ctaStyle: "underline", hdMax: u * 0.1, hdW: 700, c: cPoster }).svg;
+    body += brandMark(cx, "middle", H - ins - u * 0.04);
+  } else if (layout === "split") {
+    var vertical = H > W * 1.1, onS = onColor(ac);
+    if (vertical) {
+      var ph = H * 0.34;
+      body += '<rect x="0" y="0" width="' + W + '" height="' + n(ph) + '" fill="' + ac + '"/>';
+      if (hl) { var hf = fitBox(hl, W - 2 * pad, ph - pad * 1.2, u * 0.22, u * 0.06, 800, 1.05); body += T(hf.lines, cx, ph / 2 - hf.h / 2 + hf.size * 0.88, hf.size, 800, onS, "middle", 1.05); }
+      body += brandMark(sx, "start", ph + pad * 0.9);
+      body += block({ x0: pad, x1: W - pad, y0: ph + pad * 1.4, y1: H - pad, align: "start", v: "middle", ctaStyle: "pill", hdMax: u * 0.095, c: cPoster }).svg;
+    } else {
+      var pw2 = W * 0.36, px2 = rtl ? W - pw2 : 0;
+      body += '<rect x="' + n(px2) + '" y="0" width="' + n(pw2) + '" height="' + H + '" fill="' + ac + '"/>';
+      if (hl) { var hf2 = fitBox(hl, pw2 - pad * 1.2, H * 0.5, u * 0.2, u * 0.06, 800, 1.05); body += T(hf2.lines, px2 + pw2 / 2, H / 2 - hf2.h / 2 + hf2.size * 0.88, hf2.size, 800, onS, "middle", 1.05); }
+      var tx0 = rtl ? pad : pw2 + pad * 0.8, tx1 = rtl ? W - pw2 - pad * 0.8 : W - pad;
+      body += brandMark(rtl ? tx1 : tx0, "start", pad + u * 0.02);
+      body += block({ x0: tx0, x1: tx1, y0: pad * 1.6, y1: H - pad, align: "start", v: "middle", ctaStyle: "pill", hdMax: u * 0.095, c: cPoster }).svg;
+    }
+  } else if (layout === "stat") {
+    var hlC = cr(bg, acc) >= 3 ? acc : fg;
+    var sf = fitBox(hl, W - 2 * pad, H * 0.34, u * 0.3, u * 0.1, 800, 1.0), yTop = pad * 1.6;
+    body += brandMark(sx, "start", pad + u * 0.02);
+    body += T(sf.lines, cx, yTop + sf.size * 0.85, sf.size, 800, hlC, "middle", 1.0);
+    body += block({ x0: pad, x1: W - pad, y0: yTop + sf.h + gap * 0.6, y1: H - pad, align: "middle", v: "middle", ctaStyle: "pill", hdMax: u * 0.078, c: cPoster }).svg;
+  } else if (layout === "badge") {
+    var r = u * 0.14, bx = rtl ? pad + r * 0.95 : W - pad - r * 0.95, by = pad + r * 0.95, onB = onColor(ac);
+    var bt = fitBox(hl, r * 1.5, r * 1.1, u * 0.085, u * 0.03, 800, 1.0);
+    body += '<g transform="rotate(-10 ' + n(bx) + ' ' + n(by) + ')"><circle cx="' + n(bx) + '" cy="' + n(by) + '" r="' + n(r) + '" fill="' + ac + '"/><circle cx="' + n(bx) + '" cy="' + n(by) + '" r="' + n(r * 0.88) + '" fill="none" stroke="' + onB + '" stroke-width="' + n(u * 0.004) + '" opacity=".5"/>' + T(bt.lines, bx, by - bt.h / 2 + bt.size * 0.88, bt.size, 800, onB, "middle", 1.0) + '</g>';
+    body += brandMark(sx, "start", pad + u * 0.02);
+    body += block({ x0: pad, x1: W - pad, y0: pad + r * 2 + gap * 0.5, y1: H - pad, align: "middle", v: "middle", ctaStyle: "pill", hdMax: u * 0.1, c: cPoster }).svg;
+  } else {
+    body += brandMark(sx, "start", pad + u * 0.02);
+    body += block({ x0: pad, x1: W - pad, y0: pad * 1.5, y1: H - pad * 1.2, align: "middle", v: "middle", ctaStyle: "pill", hdMax: u * 0.115, c: cPoster }).svg;
+  }
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '">' + body + '</svg>';
+}
+function svgUrl(svg) { return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg); }
+function saveBlob(blob, name) {
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+}
+function downloadPng(svg, fmt, name) {
+  var d = FORMATS[fmt] || FORMATS.square, img = new Image();
+  img.onload = function () {
+    var c = document.createElement("canvas"); c.width = d[0]; c.height = d[1];
+    c.getContext("2d").drawImage(img, 0, 0, d[0], d[1]);
+    c.toBlob(function (b) { if (b) saveBlob(b, name + ".png"); }, "image/png");
+  };
+  img.src = svgUrl(svg);
+}
+
+/* ========== Helpers ========== */
+var $ = function (id) { return document.getElementById(id); };
+var lang = "ar", tab = "campaign", busy = false;
+var briefs = { campaign: "", posts: "", design: "", ads: "", write: "" };
+var seeded = { campaign: true, posts: true, design: true, ads: true, write: true };
+try { lang = localStorage.getItem("ms-lang") || (/^ar/i.test(navigator.language || "") ? "ar" : "en"); } catch (e) { lang = "ar"; }
+if (lang !== "ar" && lang !== "en") lang = "ar";
+
+function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+function fillSelect(sel, list, keep) {
+  var prev = keep ? sel.value : "", i, o;
+  sel.replaceChildren();
+  for (i = 0; i < list.length; i++) { o = document.createElement("option"); o.value = list[i][0]; o.textContent = list[i][1]; sel.appendChild(o); }
+  if (prev) sel.value = prev;
+  if (sel.selectedIndex < 0 && sel.options.length) sel.selectedIndex = 0;
+}
+function copyText(text, btn, key) {
+  function done() { btn.textContent = L[lang].copied; setTimeout(function () { btn.textContent = L[lang][key || "copy"]; }, 1500); }
+  function fallback() {
+    var ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch (e) {}
+    ta.remove();
+  }
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+}
+function copyBtn(getText) {
+  var b = el("button", "btn2", L[lang].copy); b.type = "button";
+  b.addEventListener("click", function () { copyText(getText(), b); });
+  return b;
+}
+function post(url, body) {
+  return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, status: r.status, d: d }; }); });
+}
+function errText(x) {
+  var T = L[lang];
+  if (x.status === 429) return T.busy;
+  if (x.status === 422) return (x.d && x.d.reason) || T.declined;
+  if (x.status === 503) return T.notConn;
+  return T.fail;
+}
+
+/* ========== Brand kit and history (stored on the device only) ========== */
+var KIT_KEY = "ms-kit", HIST_KEY = "ms-hist";
+function loadKit() {
+  try {
+    var k = JSON.parse(localStorage.getItem(KIT_KEY) || "{}");
+    $("brand").value = k.brand || ""; $("about").value = k.about || "";
+    $("useColors").checked = !!k.useColors;
+    if (/^#[0-9a-fA-F]{6}$/.test(k.c1 || "")) $("c1").value = k.c1;
+    if (/^#[0-9a-fA-F]{6}$/.test(k.c2 || "")) $("c2").value = k.c2;
+    if (k.brand || k.about || k.useColors) $("kit").open = true;
+  } catch (e) {}
+}
+function saveKit() {
+  try { localStorage.setItem(KIT_KEY, JSON.stringify({ brand: $("brand").value, about: $("about").value, useColors: $("useColors").checked, c1: $("c1").value, c2: $("c2").value })); } catch (e) {}
+}
+function kitColors() { return $("useColors").checked ? [$("c1").value, $("c2").value] : []; }
+function kitPalette() {
+  if (!$("useColors").checked) return null;
+  var c1 = $("c1").value, c2 = $("c2").value;
+  return [c1, readable(c1, "#FFFFFF"), c2];
+}
+function readHist() { try { var h = JSON.parse(localStorage.getItem(HIST_KEY) || "[]"); return Array.isArray(h) ? h : []; } catch (e) { return []; } }
+function writeHist(h) { try { localStorage.setItem(HIST_KEY, JSON.stringify(h.slice(0, 12))); } catch (e) {} }
+function pushHist(entry) { var h = readHist(); h.unshift(entry); writeHist(h); renderHist(); }
+function renderHist() {
+  var t = L[lang], box = $("histList"), h = readHist();
+  box.replaceChildren();
+  if (!h.length) { box.appendChild(el("p", "hint", t.histEmpty)); return; }
+  h.forEach(function (e) {
+    var row = el("div", "histrow");
+    var b = el("button", "go", (t.tabs[e.tab] || e.tab) + ": " + e.label); b.type = "button";
+    b.addEventListener("click", function () { restore(e); });
+    row.appendChild(b); box.appendChild(row);
+  });
+  var c = el("button", "btn2", t.histClear); c.type = "button";
+  c.addEventListener("click", function () { writeHist([]); renderHist(); });
+  box.appendChild(c);
+}
+function restore(e) {
+  setTab(e.tab, false);
+  renderResult(e.tab, e.data, e.fmt, e.brand);
+  $("out").scrollIntoView();
+}
+
+/* ========== Design editor ========== */
+function createEditor(spec0, fmt0, brandName, openControls) {
+  var spec = clone(spec0), fmt = fmt0, t = L[lang], root = el("div", "editor");
+  var prev = el("div", "edprev"), img = el("img"), acts = el("div", "acts");
+  img.alt = spec.headline || "";
+  var bPng = el("button", "btn2", t.dlPng), bSvg = el("button", "btn2", t.dlSvg);
+  bPng.type = "button"; bSvg.type = "button";
+  bPng.addEventListener("click", function () { downloadPng(buildSvg(spec, fmt, brandName), fmt, "mero-design"); });
+  bSvg.addEventListener("click", function () { saveBlob(new Blob([buildSvg(spec, fmt, brandName)], { type: "image/svg+xml" }), "mero-design.svg"); });
+  acts.appendChild(bPng); acts.appendChild(bSvg);
+  prev.appendChild(img); prev.appendChild(acts); root.appendChild(prev);
+
+  var det = el("details", "edctl"); det.open = !!openControls;
+  det.appendChild(el("summary", null, t.ed.controls));
+  var body = el("div", "edbody"); det.appendChild(body);
+  function field(label, node) { var f = el("div", "f"); f.appendChild(el("span", "lb", label)); f.appendChild(node); body.appendChild(f); return node; }
+  function textIn(key, max) {
+    var i = el("input"); i.type = "text"; i.maxLength = max; i.setAttribute("aria-label", key);
+    i.addEventListener("input", function () { spec[key] = i.value; draw(); });
+    return i;
+  }
+  var inHead = field(t.ed.head, textIn("headline", 90)), inSub = field(t.ed.sub, textIn("subline", 150));
+  var inCta = field(t.ed.cta, textIn("cta", 40)), inHi = field(t.ed.hi, textIn("highlight", 12));
+  var selLayout = field(t.ed.layout, el("select")), selMotif = field(t.ed.motif, el("select")), selFmt = field(t.ed.format, el("select"));
+  fillSelect(selLayout, LAYOUTS.map(function (k) { return [k, t.layoutN[k]]; }));
+  fillSelect(selMotif, MOTIFS.map(function (k) { return [k, t.motifN[k]]; }));
+  fillSelect(selFmt, t.formats);
+  selLayout.addEventListener("change", function () { spec.layout = selLayout.value; draw(); });
+  selMotif.addEventListener("change", function () { spec.motif = selMotif.value; draw(); });
+  selFmt.addEventListener("change", function () { fmt = selFmt.value; draw(); });
+
+  var swBox = el("div", "swatches"), swBtns = [];
+  var pals = PRESETS.slice(), kp = kitPalette();
+  if (kp) pals.unshift([kp[0], kp[1], kp[2]]);
+  pals.forEach(function (p) {
+    var b = el("button", "sw"); b.type = "button"; b.setAttribute("aria-label", "palette"); b.setAttribute("aria-pressed", "false");
+    b.style.background = "linear-gradient(90deg," + p[0] + " 0 50%," + p[2] + " 50% 100%)";
+    b.addEventListener("click", function () { spec.bg = p[0]; spec.fg = p[1]; spec.accent = p[2]; syncColors(); draw(); });
+    swBox.appendChild(b); swBtns.push(b);
+  });
+  field(t.ed.palette, swBox);
+  var colRow = el("div", "colors");
+  function colorIn(key, label) {
+    var w = el("label", "cb"); w.appendChild(el("span", null, label));
+    var i = el("input"); i.type = "color"; i.setAttribute("aria-label", key);
+    i.addEventListener("input", function () { spec[key] = i.value.toUpperCase(); syncColors(); draw(); });
+    w.appendChild(i); colRow.appendChild(w); return i;
+  }
+  var cBg = colorIn("bg", t.ed.bg), cFg = colorIn("fg", t.ed.fg), cAc = colorIn("accent", t.ed.accent);
+  body.appendChild(colRow);
+  var reset = el("button", "btn2", t.ed.reset); reset.type = "button";
+  reset.addEventListener("click", function () { api.setSpec(spec0); });
+  body.appendChild(reset);
+  root.appendChild(det);
+
+  function syncColors() {
+    cBg.value = validHex(spec.bg, "#101828"); cFg.value = validHex(spec.fg, "#FFFFFF"); cAc.value = validHex(spec.accent, "#2B3BFF");
+    pals.forEach(function (p, i) {
+      swBtns[i].setAttribute("aria-pressed", String(p[0].toUpperCase() === String(spec.bg).toUpperCase() && p[2].toUpperCase() === String(spec.accent).toUpperCase()));
+    });
+  }
+  function syncAll() {
+    inHead.value = spec.headline || ""; inSub.value = spec.subline || ""; inCta.value = spec.cta || ""; inHi.value = spec.highlight || "";
+    selLayout.value = spec.layout; selMotif.value = spec.motif; selFmt.value = fmt; syncColors();
+  }
+  var pending = false;
+  function draw() {
+    if (pending) return; pending = true;
+    requestAnimationFrame(function () { pending = false; img.src = svgUrl(buildSvg(spec, fmt, brandName)); img.alt = spec.headline || ""; });
+  }
+  var api = {
+    el: root,
+    setSpec: function (s) { spec = clone(s); syncAll(); draw(); },
+    getSpec: function () { return spec; }
+  };
+  syncAll(); img.src = svgUrl(buildSvg(spec, fmt, brandName));
+  return api;
+}
+
+/* ========== Results ========== */
+function refineBar(getText, setText, kind) {
+  var t = L[lang], bar = el("div", "refine"), stack = [], btns = [], undo = el("button", "chip", t.undo), msg = el("span", "hint");
+  undo.type = "button"; undo.hidden = true;
+  Object.keys(t.ref).forEach(function (a) {
+    var b = el("button", "chip", t.ref[a]); b.type = "button"; btns.push(b);
+    b.addEventListener("click", function () {
+      var cur = getText();
+      msg.textContent = "";
+      btns.forEach(function (x) { x.disabled = true; });
+      post("/api/refine", { text: cur, action: a, kind: kind }).then(function (x) {
+        if (x.ok && x.d && x.d.text) { stack.push(cur); setText(x.d.text); undo.hidden = false; }
+        else msg.textContent = x.status === 429 ? L[lang].busy : L[lang].refineFail;
+      }).catch(function () { msg.textContent = L[lang].refineFail; })
+        .then(function () { btns.forEach(function (x) { x.disabled = false; }); });
+    });
+    bar.appendChild(b);
+  });
+  undo.addEventListener("click", function () { if (stack.length) setText(stack.pop()); if (!stack.length) undo.hidden = true; });
+  bar.appendChild(undo); bar.appendChild(msg);
+  return bar;
+}
+function textItem(label, p, extra) {
+  var t = L[lang], it = el("div", "item");
+  if (label) it.appendChild(el("span", "label", label));
+  var tx = el("div", "txt", p.text); tx.setAttribute("dir", "auto"); it.appendChild(tx);
+  if (extra && extra.beforeText) extra.beforeText(it, tx);
+  if (p.hashtags && p.hashtags.length) { var h = el("div", "tags", p.hashtags.join(" ")); h.setAttribute("dir", "auto"); it.appendChild(h); }
+  if (p.visual) { var v = el("div", "vis", t.visualIdea + p.visual); v.setAttribute("dir", "auto"); it.appendChild(v); }
+  it.appendChild(refineBar(function () { return p.text; }, function (s) { p.text = s; tx.textContent = s; if (extra && extra.onText) extra.onText(s); }, "post"));
+  var bar = el("div", "bar"); bar.appendChild(el("span", "hint", t.reviewNote));
+  bar.appendChild(copyBtn(function () { return p.text + (p.hashtags && p.hashtags.length ? "\n\n" + p.hashtags.join(" ") : ""); }));
+  it.appendChild(bar);
+  return it;
+}
+function renderPosts(data) {
+  var t = L[lang], o = $("out");
+  o.replaceChildren();
+  data.posts.forEach(function (p, i) { o.appendChild(textItem(t.option + " " + (i + 1), p)); });
+}
+function renderAds(data) {
+  var t = L[lang], o = $("out"), lim = data.limits || [40, 125];
+  o.replaceChildren();
+  data.ads.forEach(function (a, i) {
+    var it = el("div", "item");
+    it.appendChild(el("span", "label", t.option + " " + (i + 1) + (a.angle ? "  |  " + t.angle + ": " + a.angle : "")));
+    var hd = el("h3", null, a.headline); hd.setAttribute("dir", "auto"); it.appendChild(hd);
+    it.appendChild(el("span", "count" + (a.headline.length > lim[0] ? " over" : ""), a.headline.length + " / " + lim[0]));
+    var tx = el("div", "txt", a.text); tx.setAttribute("dir", "auto"); it.appendChild(tx);
+    var cnt = el("span", "count" + (a.text.length > lim[1] ? " over" : ""), a.text.length + " / " + lim[1]); it.appendChild(cnt);
+    if (a.cta) { var c = el("div", "vis", "CTA: " + a.cta); c.setAttribute("dir", "auto"); it.appendChild(c); }
+    it.appendChild(refineBar(function () { return a.text; }, function (s) { a.text = s; tx.textContent = s; cnt.textContent = s.length + " / " + lim[1]; cnt.className = "count" + (s.length > lim[1] ? " over" : ""); }, "ad"));
+    var bar = el("div", "bar"); bar.appendChild(el("span", "hint", t.reviewNote));
+    bar.appendChild(copyBtn(function () { return a.headline + "\n" + a.text + (a.cta ? "\n" + a.cta : ""); }));
+    it.appendChild(bar); o.appendChild(it);
+  });
+}
+function renderDesigns(data, fmt, brandName) {
+  var o = $("out"), concepts = data.designs, idx = 0, thumbs = [];
+  o.replaceChildren();
+  var ed = createEditor(concepts[0], fmt, brandName || data.brand || "", true);
+  var row = el("div", "thumbs");
+  concepts.forEach(function (c, i) {
+    var b = el("button", "thumb"); b.type = "button"; b.setAttribute("aria-pressed", i === 0 ? "true" : "false"); b.setAttribute("aria-label", "concept " + (i + 1));
+    var im = el("img"); im.src = svgUrl(buildSvg(c, fmt, brandName || data.brand || "")); im.alt = ""; b.appendChild(im);
+    b.addEventListener("click", function () { idx = i; ed.setSpec(concepts[i]); thumbs.forEach(function (x, j) { x.setAttribute("aria-pressed", String(j === i)); }); });
+    row.appendChild(b); thumbs.push(b);
+  });
+  o.appendChild(row); o.appendChild(ed.el); o.appendChild(el("p", "note", L[lang].reviewNote));
+}
+function renderCampaign(data, fmt, brandName) {
+  var t = L[lang], o = $("out"), pl = {};
+  t.platC.forEach(function (p) { pl[p[0]] = p[1]; });
+  o.replaceChildren();
+  data.items.forEach(function (it) {
+    var box = el("div", "camp"); box.appendChild(el("h3", null, pl[it.platform] || it.platform));
+    box.appendChild(createEditor(it.design, CAMP_FORMAT[it.platform] || "square", brandName || data.brand || "", false).el);
+    box.appendChild(textItem("", it));
+    o.appendChild(box);
+  });
+  o.appendChild(el("p", "note", t.reviewNote));
+}
+function renderWrite(data) {
+  var t = L[lang], o = $("out"), it = el("div", "item");
+  o.replaceChildren();
+  if (data.title) { var h = el("h3", null, data.title); h.setAttribute("dir", "auto"); it.appendChild(h); }
+  var tx = el("div", "txt", data.text); tx.setAttribute("dir", "auto"); it.appendChild(tx);
+  it.appendChild(refineBar(function () { return data.text; }, function (s) { data.text = s; tx.textContent = s; }, "text"));
+  var bar = el("div", "bar"); bar.appendChild(el("span", "hint", t.reviewNote));
+  bar.appendChild(copyBtn(function () { return (data.title ? data.title + "\n\n" : "") + data.text; }));
+  it.appendChild(bar); o.appendChild(it);
+}
+function renderResult(name, data, fmt, brandName) {
+  if (name === "posts") renderPosts(data);
+  else if (name === "ads") renderAds(data);
+  else if (name === "design") renderDesigns(data, fmt || "square", brandName);
+  else if (name === "campaign") renderCampaign(data, fmt, brandName);
+  else renderWrite(data);
+}
+function showEmpty() { $("out").replaceChildren(el("div", "empty", L[lang].empty)); }
+function showStatus(text, isErr) { $("out").replaceChildren(el("div", "status" + (isErr ? " err" : ""), text)); }
+
+/* ========== Tabs and form ========== */
+function renderExamples() {
+  var ex = L[lang].examples[tab], box = $("chips");
+  box.replaceChildren();
+  ex.forEach(function (t) {
+    var c = el("button", "chip", t); c.type = "button";
+    c.addEventListener("click", function () { $("brief").value = t; briefs[tab] = t; seeded[tab] = false; });
+    box.appendChild(c);
+  });
+}
+function renderCampPlat() {
+  var box = $("campPlat"), prev = {}, any = false;
+  Array.prototype.forEach.call(box.querySelectorAll("input"), function (i) { prev[i.value] = i.checked; any = true; });
+  box.replaceChildren();
+  L[lang].platC.forEach(function (p) {
+    var lab = el("label"), i = el("input"); i.type = "checkbox"; i.value = p[0];
+    i.checked = any ? !!prev[p[0]] : (p[0] === "x" || p[0] === "linkedin" || p[0] === "instagram");
+    lab.appendChild(i); lab.appendChild(el("span", null, p[1])); box.appendChild(lab);
+  });
+}
+function applyTab() {
+  var t = L[lang], i, nodes = document.querySelectorAll("[data-for]"), btns = $("tabs").children;
+  for (i = 0; i < btns.length; i++) {
+    var on = btns[i].getAttribute("data-tab") === tab;
+    btns[i].setAttribute("aria-selected", on ? "true" : "false"); btns[i].tabIndex = on ? 0 : -1;
+  }
+  for (i = 0; i < nodes.length; i++) nodes[i].hidden = nodes[i].getAttribute("data-for").split(" ").indexOf(tab) < 0;
+  $("briefLbl").textContent = t.briefLbl[tab];
+  $("go").textContent = t.gen[tab];
+  $("tabHint").textContent = t.hints[tab];
+  if (tab === "posts") fillSelect($("platform"), t.platP, true);
+  if (tab === "ads") fillSelect($("platform"), t.platA, true);
+  $("brief").value = briefs[tab] || (seeded[tab] ? t.examples[tab][0] : "");
+  renderExamples();
+}
+function setTab(name, scroll) {
+  briefs[tab] = $("brief").value;
+  tab = name; applyTab();
+  if (scroll) $("studio").scrollIntoView();
+}
+function renderTabs() {
+  var box = $("tabs");
+  box.replaceChildren();
+  TABS.forEach(function (k) {
+    var b = el("button", "tab", L[lang].tabs[k]); b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("data-tab", k);
+    b.addEventListener("click", function () { setTab(k, false); });
+    b.addEventListener("keydown", function (e) {
+      var i = TABS.indexOf(k), step = e.key === "ArrowRight" ? 1 : (e.key === "ArrowLeft" ? -1 : 0);
+      if (!step) return;
+      if (document.documentElement.dir === "rtl") step = -step;
+      var nx = TABS[(i + step + TABS.length) % TABS.length];
+      setTab(nx, false); box.querySelector('[data-tab="' + nx + '"]').focus();
+      e.preventDefault();
+    });
+    box.appendChild(b);
+  });
+}
+
+$("form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var t = L[lang], brief = $("brief").value.trim();
+  if (busy) return;
+  if (brief.length < 5) { showStatus(t.short, true); return; }
+  var plats = Array.prototype.filter.call($("campPlat").querySelectorAll("input"), function (i) { return i.checked; }).map(function (i) { return i.value; });
+  if (tab === "campaign" && !plats.length) { showStatus(t.platErr, true); return; }
+  briefs[tab] = brief; saveKit();
+  var payload = {
+    brief: brief, brand: $("brand").value, about: $("about").value, colors: kitColors(), out: $("outLang").value, tone: $("tone").value,
+    platform: $("platform").value, offer: $("offer").value, audience: $("audience").value,
+    format: $("format").value, kind: $("kind").value, length: $("length").value, source: $("source").value, platforms: plats
+  };
+  var current = tab, fmt = tab === "design" ? payload.format : "square", brandName = payload.brand;
+  busy = true; $("go").disabled = true; showStatus(t.loading, false);
+  post(ENDPOINT[current], payload)
+    .then(function (x) {
+      if (!x.ok) { showStatus(errText(x), true); return; }
+      renderResult(current, x.d, fmt, brandName);
+      pushHist({ tab: current, label: brief.slice(0, 36), ts: Date.now(), data: x.d, fmt: fmt, brand: brandName });
+    })
+    .catch(function () { showStatus(L[lang].fail, true); })
+    .then(function () { busy = false; $("go").disabled = false; });
+});
+
+/* ========== Static sections ========== */
+/* Payment addresses (checksum-verified). Change only if you are sure; a wrong character loses funds. */
+var PAY = [
+  { coin: "USDT", net: "TRON (TRC20)", addr: "TErLKvxUPxxhe6yQzPHz4k3DWUa9E7dSDM", low: true },
+  { coin: "USDT", net: "Ethereum (ERC20)", addr: "0xd0Ba651F2402208678ee81854Bd0220e4d014584", low: false }
+];
+function renderPay() {
+  var t = L[lang], box = $("payList"); box.replaceChildren();
+  PAY.forEach(function (p) {
+    var c = el("div", "paycard" + (p.low ? " rec" : "")), top = el("div", "top");
+    top.appendChild(el("span", "coin", p.coin)); top.appendChild(el("span", "chipnet", p.net)); c.appendChild(top);
+    c.appendChild(el("p", "warn", t.payOnly.replace("{coin}", p.coin).replace("{net}", p.net)));
+    c.appendChild(el("span", "label", t.payAddr));
+    var a = el("div", "addr", p.addr); a.setAttribute("dir", "ltr"); c.appendChild(a);
+    var cb = el("button", "btn2", t.payCopy); cb.type = "button";
+    cb.addEventListener("click", function () { copyText(p.addr, cb, "payCopy"); });
+    c.appendChild(cb);
+    c.appendChild(el("p", "small", t.payCheck.replace("{a}", p.addr.slice(0, 6)).replace("{b}", p.addr.slice(-6))));
+    c.appendChild(el("p", "small", p.low ? t.payLow : t.payHigh));
+    box.appendChild(c);
+  });
+}
+function renderStatic() {
+  var t = L[lang], box, row, b, li;
+  box = $("svcList"); box.replaceChildren();
+  t.svc.forEach(function (s) {
+    row = el("div", "svc");
+    var d = el("div"); d.appendChild(el("h3", null, s[1])); d.appendChild(el("p", null, s[2])); row.appendChild(d);
+    b = el("button", "btn2", t.tryIt); b.type = "button"; b.addEventListener("click", function () { setTab(s[0], true); });
+    row.appendChild(b); box.appendChild(row);
+  });
+  box = $("howList"); box.replaceChildren();
+  t.how.forEach(function (s) { li = el("li"); var d = el("div"); d.appendChild(el("h3", null, s[0])); d.appendChild(el("p", null, s[1])); li.appendChild(d); box.appendChild(li); });
+  box = $("planList"); box.replaceChildren();
+  t.plan.forEach(function (s) { box.appendChild(el("li", null, s)); });
+  box = $("faqList"); box.replaceChildren();
+  t.faq.forEach(function (s) { var d = el("details", "faq"); d.appendChild(el("summary", null, s[0])); d.appendChild(el("p", null, s[1])); box.appendChild(d); });
+  box = $("nav"); box.replaceChildren();
+  [["#studio", t.studioT], ["#services", t.svcT], ["#how", t.howT], ["#pricing", t.priceT], ["#faq", t.faqT]].forEach(function (x) {
+    var a = el("a", null, x[1]); a.href = x[0]; box.appendChild(a);
+  });
+  renderPay();
+}
+function renderSample() {
+  var s = L[lang].sample;
+  var svg = buildSvg({ headline: s.headline, subline: s.subline, cta: s.cta, highlight: s.highlight, layout: "badge", motif: "circles", bg: "#0D1220", fg: "#F3F4F7", accent: "#FFB800" }, "square", s.brand);
+  $("sampleImg").src = svgUrl(svg); $("sampleImg").alt = s.headline;
+}
+function applyLang() {
+  var t = L[lang], els = document.querySelectorAll("[data-i]"), i;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  for (i = 0; i < els.length; i++) els[i].textContent = t[els[i].getAttribute("data-i")];
+  $("langBtn").textContent = lang === "ar" ? "EN" : "عربي";
+  fillSelect($("tone"), t.tones, true); fillSelect($("outLang"), OUTLANGS, true);
+  fillSelect($("format"), t.formats, true); fillSelect($("kind"), t.kinds, true); fillSelect($("length"), t.lengths, true);
+  if (!$("outLang").dataset.touched) $("outLang").value = lang;
+  renderTabs(); renderCampPlat(); renderStatic(); renderSample(); applyTab(); renderHist();
+  var first = $("out").firstChild;
+  if (!first || first.className === "empty") showEmpty();
+}
+$("outLang").addEventListener("change", function () { this.dataset.touched = "1"; });
+["brand", "about", "useColors", "c1", "c2"].forEach(function (id) { $(id).addEventListener("input", saveKit); $(id).addEventListener("change", saveKit); });
+$("langBtn").addEventListener("click", function () {
+  briefs[tab] = $("brief").value;
+  Object.keys(seeded).forEach(function (k) { if (seeded[k]) briefs[k] = ""; });
+  lang = lang === "ar" ? "en" : "ar";
+  try { localStorage.setItem("ms-lang", lang); } catch (e) {}
+  applyLang();
+});
+
+loadKit();
+applyLang();
+</script>
+</body>
+</html>
