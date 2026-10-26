@@ -90,7 +90,7 @@ async function callOnce(system, user, schema, maxTokens, temperature) {
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: system }] },
         contents: [{ role: "user", parts: [{ text: JSON.stringify(user) }] }],
-        generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature, maxOutputTokens: maxTokens }
+        generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature, maxOutputTokens: Math.min(16000, maxTokens * 2 + 2000) }
       }),
       signal: AbortSignal.timeout(40000)
     }
@@ -99,12 +99,18 @@ async function callOnce(system, user, schema, maxTokens, temperature) {
   if (!r.ok) {
     const e = new Error("upstream");
     e.status = r.status;
+    try { console.error("gemini http", r.status, (await r.text()).slice(0, 300).replace(/AIza[\w-]+/g, "KEY")); } catch (_) {}
     throw e;
   }
   const data = await r.json();
   const parts = data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts;
   const raw = Array.isArray(parts) ? parts.map((p) => (p && p.text) || "").join("") : "";
-  return JSON.parse(raw || "{}");
+  try {
+    return JSON.parse(raw || "{}");
+  } catch (err) {
+    console.error("gemini bad json, finish:", data && data.candidates && data.candidates[0] && data.candidates[0].finishReason, "len", raw.length);
+    throw err;
+  }
 }
 
 async function gemini(system, user, schema, maxTokens, temperature) {
