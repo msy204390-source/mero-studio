@@ -244,10 +244,7 @@ footer { padding-top: 24px; border-top: 1px solid var(--line); color: var(--mute
           <textarea id="brief" rows="4" maxlength="800"></textarea>
           <div class="chips" id="chips"></div>
         </div>
-        <div class="f" data-for="campaign">
-          <span class="lb" data-i="lPlatforms"></span>
-          <div class="checks" id="campPlat"></div>
-        </div>
+
         <div class="f" data-for="write">
           <label class="lb" for="source" data-i="lSource"></label>
           <textarea id="source" rows="3" maxlength="1500"></textarea>
@@ -340,10 +337,10 @@ ar: {
  ref: { shorter: "اختصر", longer: "أطول", punchier: "أقوى", formal: "أكثر رسمية", casual: "أكثر عفوية", fix: "صحّح" }, undo: "تراجع", refineFail: "ما قدرنا نعدّل النص هلق.",
  ed: { controls: "تعديل التصميم", head: "العنوان", sub: "الوصف", cta: "الزر", hi: "رقم أو كلمة بارزة", layout: "التخطيط", motif: "الخلفية", palette: "ألوان جاهزة", bg: "الخلفية", fg: "النص", accent: "المميز", format: "المقاس", reset: "رجوع للأصل" },
  layoutN: { poster: "ملصق", editorial: "تحريري", band: "شريط", diagonal: "قطري", frame: "إطار", split: "مقسوم", stat: "رقم بارز", badge: "شارة" },
- motifN: { circles: "دوائر", stripes: "خطوط", grid: "شبكة", dots: "نقاط", none: "بدون" },
+ motifN: { circles: "دوائر", stripes: "خطوط", grid: "شبكة", dots: "نقاط", waves: "أمواج", rings: "حلقات", blobs: "أشكال", none: "بدون" },
  histT: "آخر نتائجك", histEmpty: "ما في نتائج محفوظة بعد.", histClear: "مسح السجل",
  svcT: "شو منقدم",
- svc: [["campaign", "حملة بأمر واحد", "جملة وحدة بتعطيك منشور وتصميم لكل منصة: إكس، لينكدإن، إنستغرام، فيسبوك."], ["posts", "منشورات سوشيال ميديا", "3 خيارات بزوايا مختلفة مع هاشتاغات وفكرة للصورة."], ["design", "تصاميم جرافيك", "8 تخطيطات ومحرر تعديل، وتنزيل بمقاسات المنصات."], ["ads", "إعلانات", "نسخ إعلانية قصيرة تحترم حدود الحروف لكل منصة."], ["write", "كتابة محتوى وكتابة عامة", "مقالات، سكريبتات فيديو، أوصاف منتجات، إيميلات، سيرة ذاتية، ترجمة."]],
+ svc: [["posts", "منشورات سوشيال ميديا", "3 خيارات بزوايا مختلفة مع هاشتاغات وفكرة للصورة."], ["design", "تصاميم جرافيك", "8 تخطيطات ومحرر تعديل، وتنزيل بمقاسات المنصات."], ["ads", "إعلانات", "نسخ إعلانية قصيرة تحترم حدود الحروف لكل منصة."], ["write", "كتابة محتوى وكتابة عامة", "مقالات، سكريبتات فيديو، أوصاف منتجات، إيميلات، سيرة ذاتية، ترجمة."]],
  tryIt: "جرّب",
  howT: "كيف بيشتغل",
  how: [["اكتب أمرك", "جملة أو اثنتين تكفي. وإذا بدك احفظ هويتك مرة وحدة: الاسم والنبذة والألوان."], ["اختار اللغة والأسلوب", "سبع لغات وست نبرات، من ودّي لراقي."], ["عدّل وانسخ أو نزّل", "حسّن النص بضغطة، عدّل التصميم، وبعدين انسخ أو نزّل."]],
@@ -353,7 +350,7 @@ ar: {
  payLow: "رسوم الشبكة أقل عادةً", payHigh: "رسوم شبكة Ethereum غالباً أعلى، فانتبه للمبالغ الصغيرة.",
  payAfter: "بعد الدفع احتفظ برقم المعاملة (TXID). الدفع والتفعيل يدويان بعد التأكد من وصول المبلغ.",
  planName: "الخطة الاحترافية", perMonth: "/ شهر", trial: "أول 3 أيام مجاناً",
- plan: ["حملات ومنشورات وإعلانات وتصاميم وكتابة", "سبع لغات", "ضمن حدود الاستخدام العادل"],
+ plan: ["منشورات وإعلانات وتصاميم وكتابة", "سبع لغات", "ضمن حدود الاستخدام العادل"],
  startWa: "اشترك الآن",
  priceNote: "الاشتراك بيتم حالياً بالعملات الرقمية. والاستوديو فوق مجاني للتجربة بحد يومي.",
  faqT: "أسئلة شائعة",
@@ -397,10 +394,10 @@ en: {
  ref: { shorter: "Shorter", longer: "Longer", punchier: "Punchier", formal: "More formal", casual: "More casual", fix: "Fix" }, undo: "Undo", refineFail: "We could not edit the text right now.",
  ed: { controls: "Edit the design", head: "Headline", sub: "Subline", cta: "Button", hi: "Big number or word", layout: "Layout", motif: "Background", palette: "Ready palettes", bg: "Background", fg: "Text", accent: "Accent", format: "Size", reset: "Reset" },
  layoutN: { poster: "Poster", editorial: "Editorial", band: "Band", diagonal: "Diagonal", frame: "Frame", split: "Split", stat: "Big number", badge: "Badge" },
- motifN: { circles: "Circles", stripes: "Stripes", grid: "Grid", dots: "Dots", none: "None" },
+ motifN: { circles: "Circles", stripes: "Stripes", grid: "Grid", dots: "Dots", waves: "Waves", rings: "Rings", blobs: "Blobs", none: "None" },
  histT: "Your recent results", histEmpty: "No saved results yet.", histClear: "Clear history",
  svcT: "What we do",
- svc: [["campaign", "One-command campaign", "One sentence gives you a post and a design for each platform: X, LinkedIn, Instagram, Facebook."], ["posts", "Social media posts", "3 options with different angles, hashtags and a visual idea."], ["design", "Graphic designs", "8 layouts and an editor, downloadable in platform sizes."], ["ads", "Ads", "Short ad copy that respects each platform's character limits."], ["write", "Content and general writing", "Articles, video scripts, product descriptions, emails, CVs, translation."]],
+ svc: [["posts", "Social media posts", "3 options with different angles, hashtags and a visual idea."], ["design", "Graphic designs", "8 layouts and an editor, downloadable in platform sizes."], ["ads", "Ads", "Short ad copy that respects each platform's character limits."], ["write", "Content and general writing", "Articles, video scripts, product descriptions, emails, CVs, translation."]],
  tryIt: "Try it",
  howT: "How it works",
  how: [["Write your command", "A sentence or two is enough. Save your brand once if you like: name, note and colors."], ["Pick language and tone", "Seven languages and six tones, from friendly to premium."], ["Edit, then copy or download", "Refine the text in one tap, adjust the design, then copy or download."]],
@@ -410,7 +407,7 @@ en: {
  payLow: "Usually lower network fees", payHigh: "Ethereum network fees are often higher, so mind small amounts.",
  payAfter: "After paying, keep your transaction ID (TXID). Payment and activation are manual once the amount arrives.",
  planName: "Professional plan", perMonth: "/ month", trial: "First 3 days free",
- plan: ["Campaigns, posts, ads, designs and writing", "Seven languages", "Within fair use limits"],
+ plan: ["Posts, ads, designs and writing", "Seven languages", "Within fair use limits"],
  startWa: "Subscribe now",
  priceNote: "Subscriptions are paid in crypto for now. The studio above is free to try with a daily limit.",
  faqT: "Frequently asked questions",
@@ -433,10 +430,10 @@ en: {
  sample: { headline: "Your morning coffee, reimagined", subline: "Selected beans, roasted fresh every day", cta: "Order now", highlight: "20%", brand: "Café Nour" }
 }};
 var OUTLANGS = [["ar", "العربية"], ["en", "English"], ["fr", "Français"], ["de", "Deutsch"], ["es", "Español"], ["tr", "Türkçe"], ["ru", "Русский"]];
-var TABS = ["campaign", "posts", "design", "ads", "write"];
-var ENDPOINT = { campaign: "/api/campaign", posts: "/api/posts", design: "/api/design", ads: "/api/ads", write: "/api/write" };
+var TABS = ["posts", "design", "ads", "write"];
+var ENDPOINT = { posts: "/api/posts", design: "/api/design", ads: "/api/ads", write: "/api/write" };
 var LAYOUTS = ["poster", "editorial", "band", "diagonal", "frame", "split", "stat", "badge"];
-var MOTIFS = ["circles", "stripes", "grid", "dots", "none"];
+var MOTIFS = ["circles", "stripes", "grid", "dots", "waves", "rings", "blobs", "none"];
 var PRESETS = [
   ["#0D1220", "#F3F4F7", "#FFB800"], ["#0B2545", "#EAF2FF", "#13B5EA"], ["#0F2A24", "#EAF7F2", "#2FD6A0"], ["#2A1033", "#FBEFFF", "#FF6FB5"],
   ["#FAF8F2", "#1A1A1A", "#D9480F"], ["#FFFFFF", "#111111", "#2B3BFF"], ["#FF5A36", "#FFFFFF", "#1B1033"], ["#2B3BFF", "#FFFFFF", "#FFB800"]
@@ -506,10 +503,30 @@ function motif(m, W, H, u, ac, fg) {
   if (m === "dots") {
     return '<defs><pattern id="p" width="38" height="38" patternUnits="userSpaceOnUse"><circle cx="19" cy="19" r="3.4" fill="' + ac + '" opacity=".28"/></pattern></defs><rect width="' + W + '" height="' + H + '" fill="url(#p)"/>';
   }
+  if (m === "waves") {
+    var o2 = "", k2;
+    for (k2 = 0; k2 < 4; k2++) {
+      var yb = H * (0.62 + k2 * 0.1), amp = u * (0.05 + k2 * 0.012);
+      o2 += '<path d="M0 ' + n(yb) + ' C ' + n(W * 0.25) + ' ' + n(yb - amp) + ', ' + n(W * 0.5) + ' ' + n(yb + amp) + ', ' + n(W * 0.75) + ' ' + n(yb - amp * 0.6) + ' S ' + W + ' ' + n(yb + amp * 0.4) + ', ' + W + ' ' + n(yb) + ' L ' + W + ' ' + H + ' L 0 ' + H + ' Z" fill="' + ac + '" opacity="' + (0.07 + k2 * 0.03) + '"/>';
+    }
+    return o2;
+  }
+  if (m === "rings") {
+    var o3 = "", k3, cx3 = W * 0.86, cy3 = H * 0.14;
+    for (k3 = 1; k3 <= 5; k3++) o3 += '<circle cx="' + n(cx3) + '" cy="' + n(cy3) + '" r="' + n(u * 0.11 * k3) + '" fill="none" stroke="' + ac + '" stroke-width="' + n(u * 0.005) + '" opacity="' + n(0.42 - k3 * 0.06) + '"/>';
+    return o3;
+  }
+  if (m === "blobs") {
+    return '<ellipse cx="' + n(W * 0.9) + '" cy="' + n(H * 0.12) + '" rx="' + n(u * 0.42) + '" ry="' + n(u * 0.3) + '" fill="' + ac + '" opacity=".2" transform="rotate(-20 ' + n(W * 0.9) + ' ' + n(H * 0.12) + ')"/>' +
+      '<ellipse cx="' + n(W * 0.08) + '" cy="' + n(H * 0.92) + '" rx="' + n(u * 0.36) + '" ry="' + n(u * 0.24) + '" fill="' + ac + '" opacity=".14" transform="rotate(25 ' + n(W * 0.08) + ' ' + n(H * 0.92) + ')"/>' +
+      '<ellipse cx="' + n(W * 0.5) + '" cy="' + n(H * 0.5) + '" rx="' + n(u * 0.5) + '" ry="' + n(u * 0.5) + '" fill="' + fg + '" opacity=".03"/>';
+  }
   return "";
 }
 
+var SVG_UID = 0;
 function buildSvg(s, fmt, brand) {
+  var uid = "u" + (++SVG_UID);
   var d = FORMATS[fmt] || FORMATS.square, W = d[0], H = d[1], u = Math.min(W, H);
   var head = String(s.headline || ""), sub = String(s.subline || ""), hl = String(s.highlight || "");
   var rtl = /[֐-ۿ]/.test(head + sub + hl);
@@ -566,7 +583,10 @@ function buildSvg(s, fmt, brand) {
     return { svg: out, top: top, bottom: y };
   }
 
-  body += '<rect width="' + W + '" height="' + H + '" fill="' + bg + '"/>' + motif(s.motif, W, H, u, ac, fg);
+  var gA = mix(bg, ac, 0.1), gB = mix(bg, lum(bg) > 0.4 ? "#000000" : "#FFFFFF", 0.07);
+  body += '<defs><linearGradient id="gb' + uid + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + gA + '"/><stop offset="1" stop-color="' + gB + '"/></linearGradient>' +
+    '<radialGradient id="gr' + uid + '" cx="' + (rtl ? "0.1" : "0.9") + '" cy="0.1" r="0.8"><stop offset="0" stop-color="' + ac + '" stop-opacity=".28"/><stop offset="1" stop-color="' + ac + '" stop-opacity="0"/></radialGradient></defs>' +
+    '<rect width="' + W + '" height="' + H + '" fill="' + bg + '"/><rect width="' + W + '" height="' + H + '" fill="url(#gb' + uid + ')"/><rect width="' + W + '" height="' + H + '" fill="url(#gr' + uid + ')"/>' + motif(s.motif, W, H, u, ac, fg).replace(/id="p"/g, 'id="p' + uid + '"').replace(/url\(#p\)/g, "url(#p" + uid + ")");
   var cPoster = { hd: fg, sb: muted, pillFill: ac, pillText: onColor(ac), cta: fg, rule: ac };
 
   if (layout === "editorial") {
@@ -649,7 +669,7 @@ function downloadPng(svg, fmt, name) {
 
 /* ========== Helpers ========== */
 var $ = function (id) { return document.getElementById(id); };
-var lang = "ar", tab = "campaign", busy = false;
+var lang = "ar", tab = "posts", busy = false;
 var briefs = { campaign: "", posts: "", design: "", ads: "", write: "" };
 var seeded = { campaign: true, posts: true, design: true, ads: true, write: true };
 try { lang = localStorage.getItem("ms-lang") || (/^ar/i.test(navigator.language || "") ? "ar" : "en"); } catch (e) { lang = "ar"; }
@@ -926,16 +946,6 @@ function renderExamples() {
     box.appendChild(c);
   });
 }
-function renderCampPlat() {
-  var box = $("campPlat"), prev = {}, any = false;
-  Array.prototype.forEach.call(box.querySelectorAll("input"), function (i) { prev[i.value] = i.checked; any = true; });
-  box.replaceChildren();
-  L[lang].platC.forEach(function (p) {
-    var lab = el("label"), i = el("input"); i.type = "checkbox"; i.value = p[0];
-    i.checked = any ? !!prev[p[0]] : (p[0] === "x" || p[0] === "linkedin" || p[0] === "instagram");
-    lab.appendChild(i); lab.appendChild(el("span", null, p[1])); box.appendChild(lab);
-  });
-}
 function applyTab() {
   var t = L[lang], i, nodes = document.querySelectorAll("[data-for]"), btns = $("tabs").children;
   for (i = 0; i < btns.length; i++) {
@@ -979,13 +989,11 @@ $("form").addEventListener("submit", function (e) {
   var t = L[lang], brief = $("brief").value.trim();
   if (busy) return;
   if (brief.length < 5) { showStatus(t.short, true); return; }
-  var plats = Array.prototype.filter.call($("campPlat").querySelectorAll("input"), function (i) { return i.checked; }).map(function (i) { return i.value; });
-  if (tab === "campaign" && !plats.length) { showStatus(t.platErr, true); return; }
   briefs[tab] = brief; saveKit();
   var payload = {
     brief: brief, brand: $("brand").value, about: $("about").value, colors: kitColors(), out: $("outLang").value, tone: $("tone").value,
     platform: $("platform").value, offer: $("offer").value, audience: $("audience").value,
-    format: $("format").value, kind: $("kind").value, length: $("length").value, source: $("source").value, platforms: plats
+    format: $("format").value, kind: $("kind").value, length: $("length").value, source: $("source").value
   };
   var current = tab, fmt = tab === "design" ? payload.format : "square", brandName = payload.brand;
   busy = true; $("go").disabled = true; showStatus(t.loading, false);
@@ -1056,7 +1064,7 @@ function applyLang() {
   fillSelect($("tone"), t.tones, true); fillSelect($("outLang"), OUTLANGS, true);
   fillSelect($("format"), t.formats, true); fillSelect($("kind"), t.kinds, true); fillSelect($("length"), t.lengths, true);
   if (!$("outLang").dataset.touched) $("outLang").value = lang;
-  renderTabs(); renderCampPlat(); renderStatic(); renderSample(); applyTab(); renderHist();
+  renderTabs(); renderStatic(); renderSample(); applyTab(); renderHist();
   var first = $("out").firstChild;
   if (!first || first.className === "empty") showEmpty();
 }
