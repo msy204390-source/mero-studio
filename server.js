@@ -79,6 +79,13 @@ const RULES =
   "Do not copy real brands, slogans, or imitate real people. Use plain text only: no markdown symbols such as asterisks or hash marks (hashtags in the hashtag field are allowed). " +
   "If the brief asks for hateful, harassing, sexual, deceptive (fake reviews, scams, impersonation) or illegal content, set ok to false and give a short reason in the client's language, and leave the other fields empty.";
 
+
+const CRAFT =
+  "Craft standards: open with a specific, concrete hook, never a generic opener. Use real details from the brief: who it is for, what changes for them, one vivid scene or number the client gave. " +
+  "Cut filler and cliches such as 'in today's fast-paced world', 'unlock', 'elevate', 'game-changer', 'take it to the next level', 'we are proud to present'. " +
+  "In Arabic write natural, fluent, native phrasing (not translated from English), avoid stiff formulas like 'نقدم لكم' and 'نسعد بإعلان', and keep sentences short and rhythmic. " +
+  "Every sentence must earn its place; vary sentence length; one clear idea per piece; end with a natural call to action. Silently draft several versions and return only the strongest. ";
+
 class QuotaError extends Error {}
 
 async function callOnce(system, user, schema, maxTokens, temperature) {
@@ -179,7 +186,7 @@ app.post("/api/posts", route((b) => {
   const platform = pick(b.platform, Object.keys(PLATFORM_POSTS), "instagram");
   return {
     system:
-      "You are a senior social media copywriter. Write 3 different post options for the client. Each option uses a different angle (for example story, benefit, question). " +
+      CRAFT + "You are a senior social media copywriter. Write 3 different post options for the client. Each option uses a different angle (for example story, benefit, question). " +
       "Platform guidance: " + PLATFORM_POSTS[platform] + ". Write in " + LANGS[c.lang] + ", tone: " + TONES[c.tone] + ". " +
       "Use the business description when it helps, without repeating it word for word. " +
       "For each post also give a one-sentence visual idea for the image or video, in the same language. " + RULES,
@@ -219,7 +226,7 @@ app.post("/api/ads", route((b) => {
   const audience = str(b.audience, 120);
   return {
     system:
-      "You are a performance advertising copywriter. Write 3 ad variants, each testing a different angle (benefit, problem, offer). " +
+      CRAFT + "You are a performance advertising copywriter. Write 3 ad variants, each testing a different angle (benefit, problem, offer). " +
       "Platform rules: " + PLATFORM_ADS[platform] + ". Respect the character limits strictly and count characters carefully. Write in " + LANGS[c.lang] + ", tone: " + TONES[c.tone] + ". " +
       "Also name the angle of each variant in one or two words. " + RULES,
     user: Object.assign(ctx(c), { offer, audience, platform }),
@@ -246,7 +253,7 @@ app.post("/api/ads", route((b) => {
 
 /* ---------- Graphic designs (spec only; the page renders and edits them) ---------- */
 const LAYOUTS = ["poster", "editorial", "band", "diagonal", "frame", "split", "stat", "badge"];
-const MOTIFS = ["circles", "stripes", "grid", "dots", "none"];
+const MOTIFS = ["circles", "stripes", "grid", "dots", "waves", "rings", "blobs", "none"];
 app.post("/api/design", route((b) => {
   const c = common(b);
   if (c.brief.length < 5) return { error: "short" };
@@ -256,10 +263,12 @@ app.post("/api/design", route((b) => {
     : "";
   return {
     system:
-      "You are an art director designing typographic social media graphics. Create 3 clearly different design concepts for the brief. " +
+      "You are an award-winning art director designing typographic social media graphics. " +
+      "Design rules: the headline is benefit-led, specific and punchy (never a generic slogan); hierarchy is clear with one dominant message; palettes are harmonious and sophisticated (deep ink, warm off-white, one confident accent; avoid pure red/green/blue and neon mixes), with the accent used sparingly; match the mood to the industry (food: warm and appetizing, tech: cool and crisp, luxury: dark with gold or cream, fitness: bold and high-energy). " +
+      "Create 3 clearly different design concepts for the brief. " +
       "Each concept has: a short headline (at most 7 words, no all-caps shouting), a subline (at most 14 words), a call to action (at most 3 words), " +
       "an optional highlight (a very short bold token of at most 12 characters such as a discount like 30%, a year, or the word NEW; leave it empty when nothing natural fits), " +
-      "a layout from [poster, editorial, band, diagonal, frame, split, stat, badge], a background motif from [circles, stripes, grid, dots, none], " +
+      "a layout from [poster, editorial, band, diagonal, frame, split, stat, badge], a background motif from [circles, stripes, grid, dots, waves, rings, blobs, none], " +
       "and a palette of three hex colors (#RRGGBB): bg, fg (text), accent. The layouts stat, badge and split need a highlight, so only use them when you provide one. " +
       "Use three different layouts and three distinct palettes that suit the brand mood, with strong contrast between bg and fg. " + brandColors +
       "Write the text in " + LANGS[c.lang] + ", tone: " + TONES[c.tone] + ". Format: " + format + ". " + RULES,
@@ -302,76 +311,6 @@ app.post("/api/design", route((b) => {
   };
 }));
 
-/* ---------- One-command campaign: a post plus a matching design per platform ---------- */
-const CAMP_PLATFORMS = ["x", "linkedin", "instagram", "facebook"];
-const CAMP_GUIDE = {
-  x: "X post: under 270 characters including hashtags, one sharp idea, at most 2 hashtags",
-  linkedin: "LinkedIn post: a strong first line, short lines with white space, a concrete takeaway, a closing question, 3 hashtags",
-  instagram: "Instagram caption: a hook in the first line (under 125 characters), short paragraphs, light emoji use, a call to action, 5 to 8 hashtags",
-  facebook: "Facebook post: conversational, 60 to 120 words, a clear call to action, up to 3 hashtags"
-};
-app.post("/api/campaign", route((b) => {
-  const c = common(b);
-  if (c.brief.length < 5) return { error: "short" };
-  const platforms = (Array.isArray(b.platforms) ? b.platforms : []).filter((p, i, a) => CAMP_PLATFORMS.includes(p) && a.indexOf(p) === i).slice(0, 4);
-  if (!platforms.length) return { error: "platforms" };
-  const brandColors = c.colors.length
-    ? "The client uses brand colors " + c.colors.join(", ") + ". Build the shared palette around these colors. "
-    : "";
-  return {
-    system:
-      "You are a creative director running one small brand campaign. For each requested platform write one post and one matching typographic graphic. " +
-      "Platform guidance: " + platforms.map((p) => p + ": " + CAMP_GUIDE[p]).join(". ") + ". " +
-      "All graphics share ONE palette (bg, fg, accent as #RRGGBB, strong contrast between bg and fg) and ONE background motif so the campaign looks like a single brand. " + brandColors +
-      "Vary the layout between platforms, choosing from [poster, editorial, band, diagonal, frame, split, stat, badge]; use stat, badge or split only when you give a highlight. " +
-      "Each graphic has a headline (at most 7 words), a subline (at most 14 words), a call to action (at most 3 words) and an optional highlight (at most 12 characters, such as 30% or NEW). " +
-      "Write in " + LANGS[c.lang] + ", tone: " + TONES[c.tone] + ". Return the items in the same order as the platforms. " + RULES,
-    user: Object.assign(ctx(c), { platforms }),
-    schema: S({
-      palette: { type: "OBJECT", properties: { bg: { type: "STRING" }, fg: { type: "STRING" }, accent: { type: "STRING" } }, required: ["bg", "fg", "accent"] },
-      motif: { type: "STRING", enum: MOTIFS },
-      items: {
-        type: "ARRAY",
-        items: {
-          type: "OBJECT",
-          properties: {
-            platform: { type: "STRING", enum: CAMP_PLATFORMS },
-            text: { type: "STRING" },
-            hashtags: { type: "ARRAY", items: { type: "STRING" } },
-            headline: { type: "STRING" }, subline: { type: "STRING" }, cta: { type: "STRING" }, highlight: { type: "STRING" },
-            layout: { type: "STRING", enum: LAYOUTS }
-          },
-          required: ["platform", "text", "headline", "layout"]
-        }
-      }
-    }),
-    max: 4500,
-    temp: 0.85,
-    clean: (o) => {
-      const pal = o.palette || {};
-      const bg = hex(pal.bg, "#101828"), fg = hex(pal.fg, "#FFFFFF"), accent = hex(pal.accent, "#2B3BFF");
-      const motif = pick(o.motif, MOTIFS, "circles");
-      const byPlatform = new Map();
-      for (const it of Array.isArray(o.items) ? o.items : []) {
-        if (it && platforms.includes(it.platform) && !byPlatform.has(it.platform)) byPlatform.set(it.platform, it);
-      }
-      const items = platforms.filter((p) => byPlatform.has(p)).map((p) => {
-        const it = byPlatform.get(p);
-        const highlight = str(it.highlight, 12);
-        let layout = pick(it.layout, LAYOUTS, "poster");
-        if (!highlight && (layout === "stat" || layout === "badge")) layout = "poster";
-        return {
-          platform: p,
-          text: longStr(it.text, 1800),
-          hashtags: (Array.isArray(it.hashtags) ? it.hashtags : []).slice(0, 10).map((h) => str(h, 40).replace(/^#*/, "#").replace(/\s+/g, "")).filter((h) => h.length > 1),
-          design: { headline: str(it.headline, 90), subline: str(it.subline, 150), cta: str(it.cta, 40), highlight, layout, motif, bg, fg, accent }
-        };
-      }).filter((it) => it.text && it.design.headline);
-      return items.length ? { items, brand: c.brand } : null;
-    }
-  };
-}));
-
 /* ---------- General writing ---------- */
 const KINDS = {
   article: "a clear, well-structured article or blog post with a title and short section headings on their own lines",
@@ -394,7 +333,7 @@ app.post("/api/write", route((b) => {
   const source = longStr(b.source, 1500);
   return {
     system:
-      "You are an expert writer and editor. Produce " + KINDS[kind] + ". Length: " + LENGTHS[length] + " unless the kind implies otherwise. " +
+      CRAFT + "You are an expert writer and editor. Produce " + KINDS[kind] + ". Length: " + LENGTHS[length] + " unless the kind implies otherwise. " +
       "Write in " + LANGS[c.lang] + ", tone: " + TONES[c.tone] + ". Put a short title in the title field and the full text in the text field, using blank lines between paragraphs. " + RULES,
     user: Object.assign(ctx(c), { text_to_work_on: source }),
     schema: S({ title: { type: "STRING" }, text: { type: "STRING" } }),
